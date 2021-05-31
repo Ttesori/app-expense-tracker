@@ -4,7 +4,10 @@ const User = require('../models/User')
 
 module.exports = {
   getHome: (req, res) => {
-    res.render('home/index.ejs');
+    res.render('home/index.ejs', {
+      title: 'Home',
+      className: 'page-home'
+    });
   },
   loginUser: (req, res, next) => {
     const validationErrors = []
@@ -13,7 +16,7 @@ module.exports = {
 
     if (validationErrors.length) {
       req.flash('errors', validationErrors)
-      return res.redirect('/login')
+      return res.redirect('/')
     }
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false })
 
@@ -21,17 +24,20 @@ module.exports = {
       if (err) { return next(err) }
       if (!user) {
         req.flash('errors', info)
-        return res.redirect('/login')
+        return res.redirect('/')
       }
       req.logIn(user, (err) => {
         if (err) { return next(err) }
         req.flash('success', { msg: 'Success! You are logged in.' })
-        res.redirect(req.session.returnTo || '/expenses')
+        res.redirect(req.session.returnTo || '/tracker')
       })
     })(req, res, next)
   },
   getRegisterUser: (req, res) => {
-    res.render('home/register.ejs');
+    res.render('home/register.ejs', {
+      title: 'Register',
+      className: 'page-register'
+    });
   },
   registerUser: (req, res, next) => {
     const validationErrors = []
@@ -66,7 +72,7 @@ module.exports = {
           if (err) {
             return next(err)
           }
-          res.redirect('/expenses')
+          res.redirect('/tracker')
         })
       })
     })

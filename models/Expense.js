@@ -7,7 +7,8 @@ const ExpenseSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    required: true
+    required: true,
+    default: Date.now()
   },
   amount: {
     type: Number,

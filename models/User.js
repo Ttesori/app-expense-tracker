@@ -9,7 +9,11 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  display_name: String,
+  date_format: String,
+  currency_format: String,
+  currency_symbol: String
 });
 
 // Password hash middleware.

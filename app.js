@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const homeRoutes = require('./routes/home');
 const expenseRoutes = require('./routes/expenses');
+const trackerRoutes = require('./routes/tracker');
 
 // Settings and whatnot
 app.set('view engine', 'ejs');
@@ -34,6 +35,7 @@ app.use(flash());
 // Routes come last before starting server
 app.use('/', homeRoutes);
 app.use('/expenses', expenseRoutes);
+app.use('/tracker', trackerRoutes);
 
 // Start Server
 app.listen(process.env.PORT, () => {

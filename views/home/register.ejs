@@ -1,31 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../partials/_head.ejs') %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+  <div class="container">
+    <h1>Register</h1>
+    <% if (locals.messages.errors) { %>
+      <% messages.errors.forEach( el=> { %>
+        <div class="alert alert-danger">
+          <%= el.msg %>
+        </div>
+        <% }) %>
+          <% } %>
+            <div class="card">
+              <div class="card-body">
+                <form method="post" action="/register">
+                  <fieldset>
+                    <label class="form-label">Email</label>
+                    <input type="text" name="email" class="form-control">
+                  </fieldset>
+                  <fieldset>
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control">
+                  </fieldset>
+                  <fieldset>
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" name="confirmPassword" class="form-control">
+                  </fieldset>
+                  <button class="btn btn-light">Register</button>
+                  <a href="/">Sign In</a>
+                </form>
+              </div>
+            </div>
 
-<body>
-  <h1>Register</h1>
-  <% if (locals.messages.errors) { %>
-    <% messages.errors.forEach( el=> { %>
-      <div class="alert alert-danger">
-        <%= el.msg %>
-      </div>
-      <% }) %>
-        <% } %>
-          <form method="post" action="/register">
-            <label>Email</label>
-            <input type="text" name="email">
-            <label>Password</label>
-            <input type="password" name="password">
-            <label>Password</label>
-            <input type="password" name="confirmPassword">
-            <button>Sign In</button>
-          </form>
-</body>
+  </div>
 
-</html>
+  <%- include('../partials/_foot.ejs') %>
