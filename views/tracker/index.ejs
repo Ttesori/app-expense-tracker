@@ -2,6 +2,32 @@
   <div class="container">
     <h1>User Dashboard</h1>
     <a href="/logout">Log Out</a>
-  </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Add New Expense</h5>
+        <form method="post" action="/expenses">
+          <fieldset>
+            <label class="form-label">Date</label>
+            <input type="date" name="expense_date" class="form-control">
+          </fieldset>
+          <fieldset>
+            <label class="form-label">Expense Description</label>
+            <input type="text" name="expense_description" class="form-control">
+          </fieldset>
+          <fieldset>
+            <label class="form-label">Amount</label>
+            <input type="number" step=".01" name="expense_amount" class="form-control">
+          </fieldset>
+          <fieldset>
+            <label class="form-label">Category</label>
+            <input type="text" name="expense_category" class="form-control">
+          </fieldset>
+          <input type="hidden" name="_id" id="_id" value="<%= user_id %>">
+          <button class="btn btn-light">Add New Expense</button>
 
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="/js/dashboard.js" defer></script>
   <%- include('../partials/_foot.ejs'); %>
