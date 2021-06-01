@@ -4,7 +4,7 @@ module.exports = {
   getExpenses: async (req, res) => {
     try {
       const user_id = req.user._id || req.params.uid;
-      const results = await Expense.find({ user_id: user_id });
+      const results = await Expense.find({ user_id: user_id }).sort({ date: 1 });
       res.status(200).json(results);
     } catch (err) {
       console.log(err);
