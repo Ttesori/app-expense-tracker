@@ -1,34 +1,51 @@
 <%- include('../partials/_head.ejs') %>
+  <style>
+    .hide {
+      position: absolute;
+      left: -9999px;
+    }
+  </style>
   <div class="container">
     <h1>User Dashboard</h1>
     <a href="/logout">Log Out</a>
-    <section id="expenses"></section>
+    <div class="expenses-container">
+      <h2>Expenses</h2>
+      <p>Add expenses below for them to show up here.</p>
+      <section id="expenses"></section>
+      <button id="btn-show-all">Show All Expenses</button>
+      <button id="btn-show-month" class="hide">Show This Month's Expenses</button>
+    </div>
+
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Add New Expense</h5>
-        <form method="post" action="/expenses">
+
+        <form method="post" action="/expenses" id="expenses-form" name="expenses-form">
+          <h5 class="expenses-form-title card-title">Add New Expense</h5>
           <fieldset>
             <label class="form-label">Date</label>
-            <input type="date" name="expense_date" class="form-control">
+            <input type="date" name="expense_date" class="date-expense_date form-control">
           </fieldset>
           <fieldset>
             <label class="form-label">Expense Description</label>
-            <input type="text" name="expense_description" class="form-control">
+            <input type="text" name="expense_description" class="txt-expense_desc form-control">
           </fieldset>
           <fieldset>
             <label class="form-label">Amount</label>
-            <input type="number" step=".01" name="expense_amount" class="form-control">
+            <input type="number" step=".01" name="expense_amount" class="number-expense_amt form-control">
           </fieldset>
           <fieldset>
             <label class="form-label">Category</label>
-            <input type="text" name="expense_category" class="form-control">
+            <input type="text" name="expense_category" class="txt-expense_category form-control">
           </fieldset>
-          <input type="hidden" name="_id" id="_id" value="<%= user_id %>">
-          <button class="btn btn-light">Add New Expense</button>
+          <input type="hidden" class="hidden-id" name="_id" value="">
+          <button class="btn-expenses_submit btn btn-light">Add New Expense</button>
 
         </form>
       </div>
     </div>
   </div>
+  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+  <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
+  <script>dayjs.extend(window.dayjs_plugin_utc)</script>
   <script src="/js/dashboard.js" defer></script>
   <%- include('../partials/_foot.ejs'); %>
