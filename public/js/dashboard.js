@@ -16,11 +16,13 @@ const els = {
 
 let expenses = [];
 
-const fetchRequest = async (uri, method = 'GET', payload) => {
-  if (method === 'GET') {
+const fetchRequest = async (uri, payload) => {
+  if (!payload) {
     let resp = await fetch(uri);
     return await resp.json()
   }
+  let resp = await fetch(uri, payload);
+  return await resp.status;
 }
 const getExpenses = async () => {
   const data = await fetchRequest(`/expenses`);
@@ -35,6 +37,8 @@ const getExpensesByMonth = async (month) => {
 }
 
 const showExpenses = (expenses) => {
+  if (expenses.length === 0) return;
+
   els.expensesEl.innerHTML = '';
   const ul = document.createElement('ul');
   expenses.forEach(expense => {
@@ -46,16 +50,23 @@ const showExpenses = (expenses) => {
     ${formatMoney(expense.amount)} -
     ${expense.category}
     <button class="btn-expense-edit">Edit</button>
+    <button class="btn-expense-del">X</button>
     `;
     ul.appendChild(li);
   });
   els.expensesEl.appendChild(ul);
   addEditEventListeners();
+  addDeleteEventListeners();
 }
 
 const addEditEventListeners = () => {
   let editButtons = document.querySelectorAll('.btn-expense-edit');
   editButtons.forEach(button => button.addEventListener('click', handleEditExpense));
+}
+
+const addDeleteEventListeners = () => {
+  let delButtons = document.querySelectorAll('.btn-expense-del');
+  delButtons.forEach(button => button.addEventListener('click', handleDeleteExpense));
 }
 
 const handleEditExpense = (e) => {
@@ -64,6 +75,35 @@ const handleEditExpense = (e) => {
   const expense = expenses.find(expense => expense._id === btnId);
   // fill in form with data
   fillInEditForm(expense);
+}
+
+const handleDeleteExpense = (e) => {
+  const btnId = e.path[1].dataset.id;
+
+  // send delete request with that ID
+  let answer = confirm('Are you sure you want to remove this expense?')
+  if (answer) {
+    deleteExpense(btnId);
+  }
+
+}
+
+const deleteExpense = async (id) => {
+  console.log('Deleting expense', id);
+  let body = {
+    id: id
+  };
+  let resp = await fetchRequest('/expenses', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  if (resp === 200) {
+    expenses = await getExpenses();
+    if (expenses.length > 0) return showExpenses(expenses);
+  }
 }
 
 const fillInEditForm = (expense) => {

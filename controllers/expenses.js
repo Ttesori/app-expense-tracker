@@ -65,8 +65,17 @@ module.exports = {
       res.status(400).send(err);
     }
   },
-  deleteExpense: (req, res) => {
-    res.send('Removing expense...')
+  deleteExpense: async (req, res) => {
+    try {
+      let result = await Expense.deleteOne({ _id: req.body.id });
+      console.log(result);
+      if (result.deletedCount > 0) {
+        res.status(200).send();
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(400).json(err);
+    }
 
   }
 }
