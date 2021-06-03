@@ -12,21 +12,27 @@
       <p>Add accounts below for them to show up here.</p>
       <section id="accounts"></section>
     </div>
+    <% if (locals.messages.errors) { %>
+      <% messages.errors.forEach( el=> { %>
+        <div class="alert alert-danger">
+          <%= el.msg %>
+        </div>
+        <% }) %>
+          <% } %>
+            <div class="card">
+              <div class="card-body">
 
-    <div class="card">
-      <div class="card-body">
-
-        <form method="post" action="/accounts" id="accounts-form" name="accounts-form">
-          <h5 class="accounts-form-title card-title">Add New Account</h5>
-          <fieldset>
-            <label class="form-label">Description</label>
-            <input type="text" name="account_name" class="txt-account_desc form-control">
-          </fieldset>
-          <input type="hidden" class="hidden-id" name="_id" value="">
-          <button class="btn-accounts_submit btn btn-light">Add New Account</button>
-        </form>
-      </div>
-    </div>
+                <form method="post" action="/accounts" id="accounts-form" name="accounts-form">
+                  <h5 class="accounts-form-title card-title">Add New Account</h5>
+                  <fieldset>
+                    <label class="form-label">Description</label>
+                    <input type="text" name="account_desc" class="txt-account_desc form-control">
+                  </fieldset>
+                  <input type="hidden" class="hidden-id" name="_id" value="">
+                  <button class="btn-accounts_submit btn btn-light">Add New Account</button>
+                </form>
+              </div>
+            </div>
   </div>
   <script src="/js/dashboard-accounts.js" defer></script>
   <%- include('../partials/_foot.ejs'); %>

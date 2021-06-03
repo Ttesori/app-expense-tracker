@@ -7,5 +7,6 @@ router.get('/', ensureAuth, accountsController.getAccounts);
 router.post('/', ensureAuth, accountsController.postAccount);
 router.put('/', ensureAuth, accountsController.putAccount);
 router.delete('/', ensureAuth, accountsController.deleteAccount);
+router.get('/count', ensureAuth, accountsController.getAccountsWithCount);
 
 module.exports = router;

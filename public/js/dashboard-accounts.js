@@ -2,22 +2,34 @@ let accounts;
 const els = {
   accountsEl: document.getElementById('accounts'),
   txtAccountNameEl: document.querySelector('.txt-account_desc'),
-  hiddenIdEl: document.querySelector('.hidden-id')
+  hiddenIdEl: document.querySelector('.hidden-id'),
+  editForm: {
+    formEl: document.querySelector('#accounts-form'),
+    title: document.querySelector('.accounts-form-title'),
+    btn: document.querySelector('.btn-accounts_submit'),
+  }
 }
 
 
-const fetchRequest = async (uri, payload) => {
-  if (!payload) {
+const fetchRequest = async (uri, method, body) => {
+  if (!method) {
     let resp = await fetch(uri);
     return await resp.json()
   }
-  let resp = await fetch(uri, payload);
-  return await resp.status;
+  let resp = await fetch(uri, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  return await resp;
 }
 
 const getAccounts = async () => {
-  const data = await fetchRequest(`/accounts`);
+  const data = await fetchRequest(`/accounts/count`);
   accounts = data;
+  console.log(accounts);
   return data;
 }
 
@@ -26,16 +38,18 @@ const showAccounts = (accounts) => {
 
   els.accountsEl.innerHTML = '';
   const ul = document.createElement('ul');
-  accounts.forEach(account => {
+  for (let account_id in accounts) {
+    const account = accounts[account_id];
     const li = document.createElement('li');
     li.setAttribute('data-id', account._id);
     li.innerHTML = `
     ${account.desc}
+    (${account.count})
     <button class="btn-account-edit">Edit</button>
-    <button class="btn-account-del">X</button>
+    ${account.count === 0 ? '<button class="btn-account-del">X</button>' : ''}
     `;
     ul.appendChild(li);
-  });
+  }
   els.accountsEl.appendChild(ul);
   addEditEventListeners();
   addDeleteEventListeners();
@@ -59,7 +73,7 @@ const handleEdit = (e) => {
   fillInEditForm(account);
 }
 
-const handleDelete = () => {
+const handleDelete = (e) => {
   const btnId = e.path[1].dataset.id;
 
   // send delete request with that ID
@@ -72,7 +86,36 @@ const handleDelete = () => {
 const fillInEditForm = (account) => {
   els.txtAccountNameEl.value = account.desc;
   els.hiddenIdEl.value = account._id;
+  els.editForm.title.textContent = 'Edit Account';
+  els.editForm.btn.textContent = 'Edit Account';
+  els.editForm.btn.addEventListener('click', sendEdits)
 }
+
+const sendEdits = async (e) => {
+  // Check to see if value has changed, if it hasn't do not send update
+  e.preventDefault();
+  let resp = await fetchRequest('/accounts',
+    'PUT', {
+    _id: els.hiddenIdEl.value,
+    desc: els.txtAccountNameEl.value,
+  });
+  if (resp.status === 200) {
+    return location.reload();
+  }
+  console.log(resp)
+}
+
+const deleteExpense = async (btnId) => {
+  let resp = await fetchRequest('/accounts', 'DELETE',
+    {
+      id: btnId
+    });
+  if (resp.status === 200) {
+    return location.reload();
+  }
+  console.log(resp);
+}
+
 
 const init = async () => {
   showAccounts(await getAccounts());

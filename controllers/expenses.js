@@ -1,5 +1,4 @@
 const Expense = require('../models/Expense');
-const Account = require('../models/Account');
 const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc')
 const DATE_FORMAT = 'YYYY-MM-DD';
@@ -32,31 +31,14 @@ module.exports = {
     }
   },
   postExpense: async (req, res) => {
-    // Check if account Id exists
+
     try {
-      let account = await Account.find({
-        user_id: req.user._id,
-        desc: req.body.expense_account
-      });
-      let account_id;
-      if (account.length !== 0) account_id = account[0]._id;
-
-      // If not found, create account
-      if (account_id === undefined) {
-        let account = {
-          desc: req.body.expense_account,
-          user_id: req.user._id
-        }
-        let resp = await Account.create(account);
-        account_id = await resp._id;
-      }
-
       let expense = {
         desc: req.body.expense_description,
         date: dayjs(req.body.expense_date).toISOString(),
         amount: Number(req.body.expense_amount),
         category: req.body.expense_category,
-        account_id: account_id,
+        account_id: req.body.expense_account,
         user_id: req.user._id || req.body._id
       };
       let resp = await Expense.create(expense);
@@ -68,7 +50,7 @@ module.exports = {
     }
   },
   putExpense: async (req, res) => {
-    console.log(req.body.expense_date, dayjs(req.body.expense_date).utc(true))
+    console.log(req.body);
     try {
       let resp = await Expense.findOneAndUpdate(
         { _id: req.body._id },
