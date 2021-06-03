@@ -7,7 +7,6 @@
   </style>
   <div class="container">
     <h1>User Dashboard</h1>
-    <a href="/logout">Log Out</a>
     <div class="expenses-container">
       <h2>Expenses</h2>
       <p>Add expenses below for them to show up here.</p>
@@ -26,12 +25,19 @@
             <input type="date" name="expense_date" class="date-expense_date form-control">
           </fieldset>
           <fieldset>
+            <label class="form-label">Account</label>
+            <select name="expense_account" class="txt-expense_acc form-select" id="expense_account">
+              <option value="#">Choose an Account</option>
+            </select>
+
+          </fieldset>
+          <fieldset>
             <label class="form-label">Expense Description</label>
             <input type="text" name="expense_description" class="txt-expense_desc form-control">
           </fieldset>
           <fieldset>
             <label class="form-label">Amount</label>
-            <input type="number" step=".01" name="expense_amount" class="number-expense_amt form-control">
+            <input type="number" min="0" step=".01" name="expense_amount" class="number-expense_amt form-control">
           </fieldset>
           <fieldset>
             <label class="form-label">Category</label>

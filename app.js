@@ -9,6 +9,7 @@ const methodOverride = require('method-override')
 const homeRoutes = require('./routes/home');
 const expenseRoutes = require('./routes/expenses');
 const trackerRoutes = require('./routes/tracker');
+const accountRoutes = require('./routes/accounts');
 
 // Settings and whatnot
 app.set('view engine', 'ejs');
@@ -38,6 +39,7 @@ app.use(passport.session());
 // Routes come last before starting server
 app.use('/', homeRoutes);
 app.use('/expenses', expenseRoutes);
+app.use('/accounts', accountRoutes);
 app.use('/tracker', trackerRoutes);
 
 // Start Server

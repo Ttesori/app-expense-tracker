@@ -1,4 +1,5 @@
 const Expense = require('../models/Expense');
+const Account = require('../models/Account');
 const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc')
 const DATE_FORMAT = 'YYYY-MM-DD';
@@ -21,7 +22,8 @@ module.exports = {
           }
         }).sort({ date: 1 })
       } else {
-        results = await Expense.find({ user_id: user_id }).sort({ date: 1 })
+        results = await Expense.find({ user_id: user_id }).sort({ date: 1 }).populate('account_id')
+        console.log(results);
       }
       res.status(200).json(results);
     } catch (err) {
@@ -30,12 +32,31 @@ module.exports = {
     }
   },
   postExpense: async (req, res) => {
+    // Check if account Id exists
     try {
+      let account = await Account.find({
+        user_id: req.user._id,
+        desc: req.body.expense_account
+      });
+      let account_id;
+      if (account.length !== 0) account_id = account[0]._id;
+
+      // If not found, create account
+      if (account_id === undefined) {
+        let account = {
+          desc: req.body.expense_account,
+          user_id: req.user._id
+        }
+        let resp = await Account.create(account);
+        account_id = await resp._id;
+      }
+
       let expense = {
         desc: req.body.expense_description,
         date: dayjs(req.body.expense_date).toISOString(),
         amount: Number(req.body.expense_amount),
         category: req.body.expense_category,
+        account_id: account_id,
         user_id: req.user._id || req.body._id
       };
       let resp = await Expense.create(expense);
@@ -55,6 +76,7 @@ module.exports = {
           desc: req.body.expense_description,
           date: dayjs(req.body.expense_date).toISOString(),
           amount: Number(req.body.expense_amount),
+          account_id: req.body.expense_account,
           category: req.body.expense_category,
         });
       console.log(resp);

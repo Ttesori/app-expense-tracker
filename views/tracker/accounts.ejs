@@ -1,0 +1,32 @@
+<%- include('../partials/_head.ejs') %>
+  <style>
+    .hide {
+      position: absolute;
+      left: -9999px;
+    }
+  </style>
+  <div class="container">
+    <h1>User Accounts</h1>
+    <div class="accounts-container">
+      <h2>Accounts</h2>
+      <p>Add accounts below for them to show up here.</p>
+      <section id="accounts"></section>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+
+        <form method="post" action="/accounts" id="accounts-form" name="accounts-form">
+          <h5 class="accounts-form-title card-title">Add New Account</h5>
+          <fieldset>
+            <label class="form-label">Description</label>
+            <input type="text" name="account_name" class="txt-account_desc form-control">
+          </fieldset>
+          <input type="hidden" class="hidden-id" name="_id" value="">
+          <button class="btn-accounts_submit btn btn-light">Add New Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="/js/dashboard-accounts.js" defer></script>
+  <%- include('../partials/_foot.ejs'); %>

@@ -21,6 +21,10 @@ const ExpenseSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Types.ObjectId,
     required: true
+  },
+  account_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Account',
   }
 });
 

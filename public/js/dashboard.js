@@ -10,6 +10,7 @@ const els = {
     desc: document.querySelector('.txt-expense_desc'),
     amt: document.querySelector('.number-expense_amt'),
     category: document.querySelector('.txt-expense_category'),
+    account: document.querySelector('.txt-expense_acc'),
     btnSubmit: document.querySelector('.btn-expenses_submit'),
     id: document.querySelector('.hidden-id')
   }
@@ -27,6 +28,12 @@ const fetchRequest = async (uri, payload) => {
 }
 const getExpenses = async () => {
   const data = await fetchRequest(`/expenses`);
+  console.log(data);
+  return data;
+}
+
+const getAccounts = async () => {
+  const data = await fetchRequest(`/accounts`);
   console.log(data);
   return data;
 }
@@ -49,6 +56,7 @@ const showExpenses = (expenses) => {
     ${formatDate(expense.date)} -
     ${expense.desc} -
     ${formatMoney(expense.amount)} -
+    ${expense.account_id.desc} -
     ${expense.category}
     <button class="btn-expense-edit">Edit</button>
     <button class="btn-expense-del">X</button>
@@ -113,6 +121,7 @@ const fillInEditForm = (expense) => {
   els.expenseForm.desc.value = expense.desc;
   els.expenseForm.amt.value = expense.amount;
   els.expenseForm.category.value = expense.category;
+  els.expenseForm.account.value = expense.account_id._id;
   els.expenseForm.id.value = expense._id;
   els.expenseForm.form.setAttribute('action', '/expenses?_method=PUT');
 
@@ -161,12 +170,35 @@ const createCategoryDatalist = () => {
   })
 }
 
+const showNoExpenses = () => {
+  // Hide buttons
+  // Show no expenses found message
+}
+
+const showErrors = () => {
+
+}
+
+const populateAccounts = async () => {
+  let accounts = await getAccounts();
+
+  //if (accounts.length === 0) accounts = ['Cash', 'Credit Card'];
+  console.log(accounts);
+  accounts.forEach(account => {
+    console.log(account);
+    const option = document.createElement('option');
+    option.value = account._id;
+    option.textContent = account.desc;
+    els.expenseForm.account.appendChild(option);
+  })
+}
+
 const init = async () => {
   expenses = await getExpenses();
   els.btnShowAll.addEventListener('click', handleSwitchView);
   els.btnShowMonth.addEventListener('click', handleSwitchView);
   createCategoryDatalist();
-
+  populateAccounts();
   if (expenses.length > 0) return showExpenses(expenses);
   els.btnShowAll.classList.add('hide');
 
