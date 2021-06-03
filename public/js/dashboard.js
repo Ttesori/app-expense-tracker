@@ -2,6 +2,7 @@ const els = {
   expensesEl: document.getElementById('expenses'),
   btnShowAll: document.getElementById('btn-show-all'),
   btnShowMonth: document.getElementById('btn-show-month'),
+  datalistCategory: document.getElementById('category_datalist'),
   expenseForm: {
     form: document.getElementById('expenses-form'),
     title: document.querySelector('.expenses-form-title'),
@@ -145,13 +146,30 @@ const handleSwitchView = async (e) => {
   els.btnShowMonth.classList.add('hide');
 }
 
+const createCategoryDatalist = () => {
+  let categories = expenses.reduce((categoriesMap, expense) => {
+    if (categoriesMap.indexOf(expense.category) === -1) {
+      return [...categoriesMap, expense.category]
+    }
+    return categoriesMap;
+  }, []);
+
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category;
+    els.datalistCategory.appendChild(option);
+  })
+}
+
 const init = async () => {
   expenses = await getExpenses();
   els.btnShowAll.addEventListener('click', handleSwitchView);
   els.btnShowMonth.addEventListener('click', handleSwitchView);
+  createCategoryDatalist();
 
   if (expenses.length > 0) return showExpenses(expenses);
   els.btnShowAll.classList.add('hide');
+
 }
 
 init();

@@ -35,12 +35,14 @@
           </fieldset>
           <fieldset>
             <label class="form-label">Category</label>
-            <input type="text" name="expense_category" class="txt-expense_category form-control">
+            <input type="text" name="expense_category" class="txt-expense_category form-control"
+              list="category_datalist">
           </fieldset>
           <input type="hidden" class="hidden-id" name="_id" value="">
           <button class="btn-expenses_submit btn btn-light">Add New Expense</button>
 
         </form>
+        <datalist id="category_datalist"></datalist>
       </div>
     </div>
   </div>
