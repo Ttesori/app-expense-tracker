@@ -3,7 +3,10 @@ const els = {
   btnShowAll: document.getElementById('btn-show-all'),
   btnShowMonth: document.getElementById('btn-show-month'),
   datalistCategory: document.getElementById('category_datalist'),
+  btnAdd: document.querySelector('.btn-add'),
   expenseForm: {
+    modalEl: document.getElementById('add-modal'),
+    modal: new bootstrap.Modal(document.getElementById('add-modal')),
     form: document.getElementById('expenses-form'),
     title: document.querySelector('.expenses-form-title'),
     date: document.querySelector('.date-expense_date'),
@@ -28,19 +31,16 @@ const fetchRequest = async (uri, payload) => {
 }
 const getExpenses = async () => {
   const data = await fetchRequest(`/expenses`);
-  console.log(data);
   return data;
 }
 
 const getAccounts = async () => {
   const data = await fetchRequest(`/accounts`);
-  console.log(data);
   return data;
 }
 
 const getExpensesByMonth = async (month) => {
   const data = await fetchRequest(`/expenses?month=2021-${month.toString().padStart(2, '0')}`);
-  console.log(data);
   return data;
 }
 
@@ -130,6 +130,22 @@ const fillInEditForm = (expense) => {
 
   // Update button text
   els.expenseForm.btnSubmit.textContent = 'Update Expense';
+  els.expenseForm.modal.show();
+
+  els.expenseForm.modalEl.addEventListener('hide.bs.modal', resetExpenseForm);
+
+}
+
+const resetExpenseForm = () => {
+  els.expenseForm.title.textContent = 'Add Expense';
+  els.expenseForm.btnSubmit.textContent = 'Add Expense';
+  els.expenseForm.form.setAttribute('action', '/expenses');
+  els.expenseForm.date.value = '';
+  els.expenseForm.desc.value = '';
+  els.expenseForm.amt.value = '';
+  els.expenseForm.category.value = '';
+  els.expenseForm.account.removeAttribute('value');
+  els.expenseForm.id.value = '';
 }
 
 const formatDate = (date) => {
@@ -172,7 +188,12 @@ const createCategoryDatalist = () => {
 
 const showNoExpenses = () => {
   // Hide buttons
+  els.btnShowAll.classList.add('hide');
   // Show no expenses found message
+  const div = document.createElement('div');
+  div.classList.add('no-expenses');
+  div.textContent = 'Add expenses below for them to show up here.'
+  els.expensesEl.appendChild(div);
 }
 
 const showErrors = () => {
@@ -181,11 +202,7 @@ const showErrors = () => {
 
 const populateAccounts = async () => {
   let accounts = await getAccounts();
-
-  //if (accounts.length === 0) accounts = ['Cash', 'Credit Card'];
-  console.log(accounts);
   accounts.forEach(account => {
-    console.log(account);
     const option = document.createElement('option');
     option.value = account._id;
     option.textContent = account.desc;
@@ -200,7 +217,7 @@ const init = async () => {
   createCategoryDatalist();
   populateAccounts();
   if (expenses.length > 0) return showExpenses(expenses);
-  els.btnShowAll.classList.add('hide');
+  showNoExpenses();
 
 }
 

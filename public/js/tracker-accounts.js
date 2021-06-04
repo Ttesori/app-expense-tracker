@@ -4,6 +4,8 @@ const els = {
   txtAccountNameEl: document.querySelector('.txt-account_desc'),
   hiddenIdEl: document.querySelector('.hidden-id'),
   editForm: {
+    modalEl: document.getElementById('add-modal'),
+    modal: new bootstrap.Modal(document.getElementById('add-modal')),
     formEl: document.querySelector('#accounts-form'),
     title: document.querySelector('.accounts-form-title'),
     btn: document.querySelector('.btn-accounts_submit'),
@@ -88,7 +90,14 @@ const fillInEditForm = (account) => {
   els.hiddenIdEl.value = account._id;
   els.editForm.title.textContent = 'Edit Account';
   els.editForm.btn.textContent = 'Edit Account';
-  els.editForm.btn.addEventListener('click', sendEdits)
+  els.editForm.btn.addEventListener('click', sendEdits);
+  els.editForm.modal.show();
+  els.editForm.modalEl.addEventListener('hide.bs.modal', function (e) {
+    els.editForm.title.textContent = 'Add Account';
+    els.editForm.btn.textContent = 'Add Account';
+    els.txtAccountNameEl.value = '';
+    els.editForm.btn.removeEventListener('click', sendEdits);
+  });
 }
 
 const sendEdits = async (e) => {
@@ -116,9 +125,19 @@ const deleteExpense = async (btnId) => {
   console.log(resp);
 }
 
+const showNoAccounts = () => {
+  // Show no expenses found message
+  const div = document.createElement('div');
+  div.classList.add('no-expenses');
+  div.textContent = 'Add accounts below for them to show up here.';
+  els.accountsEl.appendChild(div);
+}
+
 
 const init = async () => {
-  showAccounts(await getAccounts());
+  const accounts = await getAccounts();
+  if (accounts.length === 0) return showNoAccounts();
+  showAccounts(accounts);
 }
 
 init();

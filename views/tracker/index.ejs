@@ -8,49 +8,65 @@
   <div class="container">
     <h1>User Dashboard</h1>
     <div class="expenses-container">
-      <h2>Expenses</h2>
-      <p>Add expenses below for them to show up here.</p>
+      <h2>Expenses
+      </h2>
+      <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal">Add New Expense</button>
       <section id="expenses"></section>
       <button id="btn-show-all">Show All Expenses</button>
       <button id="btn-show-month" class="hide">Show This Month's Expenses</button>
     </div>
 
-    <div class="card">
-      <div class="card-body">
 
-        <form method="post" action="/expenses" id="expenses-form" name="expenses-form">
-          <h5 class="expenses-form-title card-title">Add New Expense</h5>
-          <fieldset>
-            <label class="form-label">Date</label>
-            <input type="date" name="expense_date" class="date-expense_date form-control">
-          </fieldset>
-          <fieldset>
-            <label class="form-label">Account</label>
-            <select name="expense_account" class="txt-expense_acc form-select" id="expense_account">
-              <option value="#">Choose an Account</option>
-            </select>
+    <div class="modal fade" tabindex="-1" id="add-modal">
+      <div class="modal-dialog">
+        <form class="modal-content" method="post" action="/expenses" id="expenses-form" name="expenses-form">
+          <div class="modal-header">
+            <h5 class="expenses-form-title modal-title">Add New Expense</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-validation"></div>
 
-          </fieldset>
-          <fieldset>
-            <label class="form-label">Expense Description</label>
-            <input type="text" name="expense_description" class="txt-expense_desc form-control">
-          </fieldset>
-          <fieldset>
-            <label class="form-label">Amount</label>
-            <input type="number" min="0" step=".01" name="expense_amount" class="number-expense_amt form-control">
-          </fieldset>
-          <fieldset>
-            <label class="form-label">Category</label>
-            <input type="text" name="expense_category" class="txt-expense_category form-control"
-              list="category_datalist">
-          </fieldset>
-          <input type="hidden" class="hidden-id" name="_id" value="">
-          <button class="btn-expenses_submit btn btn-light">Add New Expense</button>
+            <fieldset>
+              <label class="form-label">Date</label>
+              <input type="date" name="expense_date" class="date-expense_date form-control">
+            </fieldset>
+            <fieldset>
+              <label class="form-label">Account</label>
+              <select name="expense_account" class="txt-expense_acc form-select" id="expense_account">
+              </select>
+
+            </fieldset>
+            <fieldset>
+              <label class="form-label">Expense Description</label>
+              <input type="text" name="expense_description" class="txt-expense_desc form-control"
+                placeholder="Enter expense description...">
+            </fieldset>
+            <fieldset>
+              <label class="form-label">Amount</label>
+              <input type="number" min="0" step=".01" name="expense_amount" class="number-expense_amt form-control"
+                placeholder="Enter expense amount...">
+            </fieldset>
+            <fieldset>
+              <label class="form-label">Category</label>
+              <input type="text" name="expense_category" class="txt-expense_category form-control"
+                list="category_datalist" placeholder="Enter expense category...">
+            </fieldset>
+            <input type="hidden" class="hidden-id" name="_id" value="">
+
+            <datalist id="category_datalist"></datalist>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn-expenses_submit btn btn-primary">Add New Expense</button>
+          </div>
 
         </form>
-        <datalist id="category_datalist"></datalist>
       </div>
     </div>
+
+
+
   </div>
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>

@@ -9,30 +9,38 @@
     <h1>User Accounts</h1>
     <div class="accounts-container">
       <h2>Accounts</h2>
-      <p>Add accounts below for them to show up here.</p>
+      <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal">Add New Account</button>
+
       <section id="accounts"></section>
     </div>
-    <% if (locals.messages.errors) { %>
-      <% messages.errors.forEach( el=> { %>
-        <div class="alert alert-danger">
-          <%= el.msg %>
-        </div>
-        <% }) %>
-          <% } %>
-            <div class="card">
-              <div class="card-body">
 
-                <form method="post" action="/accounts" id="accounts-form" name="accounts-form">
-                  <h5 class="accounts-form-title card-title">Add New Account</h5>
-                  <fieldset>
-                    <label class="form-label">Description</label>
-                    <input type="text" name="account_desc" class="txt-account_desc form-control">
-                  </fieldset>
-                  <input type="hidden" class="hidden-id" name="_id" value="">
-                  <button class="btn-accounts_submit btn btn-light">Add New Account</button>
-                </form>
-              </div>
-            </div>
+
+    <div class="modal fade" tabindex="-1" id="add-modal">
+      <div class="modal-dialog">
+        <form class="modal-content" method="post" action="/accounts" id="accounts-form" name="accounts-form">
+          <div class="modal-header">
+            <h5 class="accounts-form-title modal-title">Add New Account</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-validation"></div>
+
+            <fieldset>
+              <label class="form-label">Description</label>
+              <input type="text" name="account_desc" class="txt-account_desc form-control">
+            </fieldset>
+            <input type="hidden" class="hidden-id" name="_id" value="">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button class="btn-accounts_submit btn btn-primary" type="submit">Add New Account</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+
   </div>
-  <script src="/js/dashboard-accounts.js" defer></script>
+  <script src="/js/tracker-accounts.js" defer></script>
   <%- include('../partials/_foot.ejs'); %>
