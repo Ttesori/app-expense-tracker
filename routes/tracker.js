@@ -7,5 +7,6 @@ router.get('/', ensureAuth, trackerController.getDashboard);
 router.get('/accounts', ensureAuth, trackerController.getAccounts);
 router.get('/profile', ensureAuth, trackerController.getProfile);
 router.put('/profile', ensureAuth, trackerController.putProfile);
+router.get('/reports', ensureAuth, trackerController.getReports);
 
 module.exports = router;

@@ -59,5 +59,12 @@ module.exports = {
     if (resp._id) {
       res.redirect('/tracker/profile');
     }
+  },
+  getReports: (req, res) => {
+    res.render('tracker/reports.ejs', {
+      title: 'Reports',
+      className: 'page-reports',
+      user: req.user
+    })
   }
 }
