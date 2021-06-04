@@ -1,4 +1,5 @@
 let expenses = [];
+let expenses_month = [];
 
 const els = {
   expensesEl: document.getElementById('expenses'),
@@ -6,6 +7,7 @@ const els = {
   btnAdd: document.querySelector('.btn-add'),
   selMonthPicker: document.getElementById('sel-choose-month'),
   expensesDesc: document.querySelector('.expenses-desc'),
+  searchEl: document.querySelector('#search'),
   expenseForm: {
     modalEl: document.getElementById('add-modal'),
     modal: new bootstrap.Modal(document.getElementById('add-modal')),
@@ -143,10 +145,11 @@ const createCategoryDatalist = () => {
 }
 
 const showNoExpenses = () => {
+  els.expensesEl.innerHTML = '';
   // Show no expenses found message
   const div = document.createElement('div');
   div.classList.add('no-expenses');
-  div.textContent = 'Add expenses below for them to show up here.'
+  div.textContent = 'No expenses found.'
   els.expensesEl.appendChild(div);
 }
 
@@ -192,11 +195,25 @@ const handleMonthChange = async () => {
     return;
   }
   // else load expenses for that month
-  showExpenses(await getExpensesByMonth(selMonth));
+  expenses_month = await getExpensesByMonth(selMonth);
+  showExpenses(expenses_month);
+}
+
+const handleSearch = (e) => {
+  let s = e.target.value.toLowerCase();
+
+  let filtered = expenses_month.filter(expense => {
+    return expense.desc.toLowerCase().includes(s) ||
+      expense.category.toLowerCase().includes(s) ||
+      expense.account_id.desc.toLowerCase().includes(s)
+  })
+  if (filtered.length === 0) { return showNoExpenses() }
+  showExpenses(filtered);
 }
 
 const addEventListeners = () => {
   els.selMonthPicker.addEventListener('change', handleMonthChange);
+  els.searchEl.addEventListener('input', handleSearch);
 }
 
 const init = async () => {
