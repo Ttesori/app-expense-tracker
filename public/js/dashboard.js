@@ -177,6 +177,10 @@ const populateMonths = async () => {
       els.selMonthPicker.appendChild(option);
     })
   }
+
+  // Set current month as active by default
+  els.selMonthPicker.value = getMonthString();
+  handleMonthChange();
 }
 
 const handleMonthChange = async () => {
@@ -197,15 +201,14 @@ const addEventListeners = () => {
 
 const init = async () => {
   expenses = await getExpenses();
-  if (expenses.length === 0) return showNoExpenses();
-  addEventListeners();
-  createCategoryDatalist();
-  populateAccounts();
-  populateMonths();
-
-  let currMonth = getMonthString();
-  els.selMonthPicker.value = currMonth;
-  handleMonthChange();
+  if (expenses.length > 0) {
+    addEventListeners();
+    createCategoryDatalist();
+    populateAccounts();
+    populateMonths();
+    return;
+  }
+  showNoExpenses();
 }
 
 init();
