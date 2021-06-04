@@ -170,7 +170,7 @@ const populateMonths = async () => {
   for (let year in monthsMap) {
     const months = monthsMap[year];
     months.forEach(month => {
-      const monthString = getMonthString(year, month).format('MMMM YYYY');
+      const monthString = getMonth(year, month).format('MMMM YYYY');
       const option = document.createElement('option');
       option.value = getMonthString(year, month);
       option.textContent = monthString;

@@ -9,6 +9,10 @@
     <h1>
       <%= title %>
     </h1>
+    <h2 class="report-title"></h2>
+    <select id="month-switcher">
+      <option value="#">Choose a Month</option>
+    </select>
     <div class="report-container">
 
     </div>
@@ -17,5 +21,6 @@
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
   <script>dayjs.extend(window.dayjs_plugin_utc)</script>
+  <script src="/js/utils.js" defer></script>
   <script src="/js/tracker-reports.js" defer></script>
   <%- include('../partials/_foot.ejs'); %>

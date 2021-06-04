@@ -17,7 +17,7 @@ const getAccounts = async () => {
   return data;
 }
 
-const getExpensesByMonth = async (month) => {
+const getExpensesByMonth = async (month = getMonthString()) => {
   const data = await fetchRequest(`/expenses?month=${month}`);
   return data;
 }
@@ -27,11 +27,21 @@ const formatDate = (date) => {
   return `${initDate.format('M/DD/YYYY')}`;
 }
 
-const formatMoney = (num, symbol = '$') => {
-  return `${symbol}${num.toFixed(2).toLocaleString()}`;
+const formatMoney = (num) => {
+  const intFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+  //const intFmt = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+  return intFmt.format(num);
+}
+
+const formatPercent = (num, total) => {
+  return parseInt((num / total) * 100) + '%';
 }
 
 const getMonthString = (year = dayjs().year(), month = dayjs().month() + 1) => {
+  return dayjs(`${year}-${month.toString().padStart(2, '0')}-01`).format('YYYY-MM-DD');
+}
+
+const getMonth = (year = dayjs().year(), month = dayjs().month() + 1) => {
   return dayjs(`${year}-${month.toString().padStart(2, '0')}-01`);
 }
 
