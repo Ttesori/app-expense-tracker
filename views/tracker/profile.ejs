@@ -1,0 +1,52 @@
+<%- include('../partials/_head.ejs') %>
+  <style>
+    .hide {
+      position: absolute;
+      left: -9999px;
+    }
+  </style>
+  <div class="container">
+    <h1>
+      <%= title %>
+    </h1>
+    <div class="profile-container">
+      <form method="POST" action="/tracker/profile?_method=PUT">
+        <fieldset>
+          <label for="user_email">Email: </label>
+          <input type="text" name="user_email" class="txt-user_email" value="<%= user.email %>" disabled>
+        </fieldset>
+        <fieldset>
+          <label for="user_name">Name: </label>
+          <input type="text" name="user_name" class="txt-user_name" value="<%= user.display_name %>"
+            placeholder="Enter display name...">
+        </fieldset>
+        <fieldset>
+          <label for="date_format">Date Format: </label>
+          <select type="text" name="date_format" class="sel-date_format">
+            <option value="1" <%=user.date_format==1 ? 'selected' : '' %>>MM/DD/YYYY</option>
+            <option value="2" <%=user.date_format==2 ? 'selected' : '' %>>DD/MM/YYYY</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <label for="number_format">Number Format: </label>
+          <select type="text" name="number_format" class="sel-number_format">
+            <option value="1" <%=user.number_format==1 ? 'selected' : '' %>>1,000.37</option>
+            <option value="2" <%=user.number_format==2 ? 'selected' : '' %>>1.000,37</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <label for="curr_symbol">Currency Symbol: </label>
+          <select type="text" name="curr_symbol" class="sel-curr_symbol">
+            <option value="$" <%=user.currency_symbol=='$' ? 'selected' : '' %>>$</option>
+            <option value="€" <%=user.currency_symbol=='€' ? 'selected' : '' %>>€</option>
+            <option value="£" <%=user.currency_symbol=='£' ? 'selected' : '' %>>£</option>
+          </select>
+        </fieldset>
+        <input type="hidden" name="hidden_id" value="<%= user._id %>">
+        <button>Update Profile</button>
+      </form>
+    </div>
+
+  </div>
+  <script src="/js/dashboard-accounts.js" defer></script>
+  <%- include('../partials/_foot.ejs'); %>

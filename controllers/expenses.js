@@ -22,7 +22,6 @@ module.exports = {
         }).sort({ date: 1 })
       } else {
         results = await Expense.find({ user_id: user_id }).sort({ date: 1 }).populate('account_id')
-        console.log(results);
       }
       res.status(200).json(results);
     } catch (err) {
@@ -50,7 +49,6 @@ module.exports = {
     }
   },
   putExpense: async (req, res) => {
-    console.log(req.body);
     try {
       let resp = await Expense.findOneAndUpdate(
         { _id: req.body._id },
@@ -61,8 +59,10 @@ module.exports = {
           account_id: req.body.expense_account,
           category: req.body.expense_category,
         });
-      console.log(resp);
-      res.redirect('/tracker');
+      if (resp._id) {
+        res.redirect('/tracker');
+      }
+
     }
     catch (err) {
       console.log(err);
@@ -72,7 +72,6 @@ module.exports = {
   deleteExpense: async (req, res) => {
     try {
       let result = await Expense.deleteOne({ _id: req.body.id });
-      console.log(result);
       if (result.deletedCount > 0) {
         res.status(200).send();
       }

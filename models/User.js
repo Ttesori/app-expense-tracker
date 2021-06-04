@@ -10,10 +10,22 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  display_name: String,
-  date_format: String,
-  currency_format: String,
-  currency_symbol: String
+  display_name: {
+    type: String,
+    default: ''
+  },
+  date_format: {
+    type: Number,
+    default: 1
+  },
+  number_format: {
+    type: Number,
+    default: 1
+  },
+  currency_symbol: {
+    type: String,
+    default: '$'
+  }
 });
 
 // Password hash middleware.
