@@ -11,7 +11,7 @@ module.exports = {
       const month = req.query.month;
       let results;
       if (month) {
-        const dateStart = dayjs(month + '-01');
+        const dateStart = dayjs(month);
         const dateEnd = dateStart.add(1, 'month');
         results = await Expense.find({
           user_id: user_id,
@@ -19,9 +19,9 @@ module.exports = {
             $gte: dateStart.format(DATE_FORMAT),
             $lte: dateEnd.format(DATE_FORMAT)
           }
-        }).sort({ date: 1 })
+        }).populate('account_id').sort({ date: -1 })
       } else {
-        results = await Expense.find({ user_id: user_id }).sort({ date: 1 }).populate('account_id')
+        results = await Expense.find({ user_id: user_id }).sort({ date: -1 }).populate('account_id')
       }
       res.status(200).json(results);
     } catch (err) {

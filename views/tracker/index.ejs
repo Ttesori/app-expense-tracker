@@ -6,14 +6,18 @@
     }
   </style>
   <div class="container">
-    <h1>User Dashboard</h1>
+    <h1>Expenses</h1>
     <div class="expenses-container">
-      <h2>Expenses
+      <h2 class="expenses-desc">
+        <select id="sel-choose-month">
+          <option value="all">All Expenses</option>
+        </select>
       </h2>
+
       <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal">Add New Expense</button>
+
       <section id="expenses"></section>
-      <button id="btn-show-all">Show All Expenses</button>
-      <button id="btn-show-month" class="hide">Show This Month's Expenses</button>
+
     </div>
 
 
@@ -26,7 +30,6 @@
           </div>
           <div class="modal-body">
             <div class="form-validation"></div>
-
             <fieldset>
               <label class="form-label">Date</label>
               <input type="date" name="expense_date" class="date-expense_date form-control">

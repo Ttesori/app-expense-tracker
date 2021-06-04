@@ -1,9 +1,9 @@
 const els = {
   expensesEl: document.getElementById('expenses'),
-  btnShowAll: document.getElementById('btn-show-all'),
-  btnShowMonth: document.getElementById('btn-show-month'),
   datalistCategory: document.getElementById('category_datalist'),
   btnAdd: document.querySelector('.btn-add'),
+  selMonthPicker: document.getElementById('sel-choose-month'),
+  expensesDesc: document.querySelector('.expenses-desc'),
   expenseForm: {
     modalEl: document.getElementById('add-modal'),
     modal: new bootstrap.Modal(document.getElementById('add-modal')),
@@ -40,7 +40,7 @@ const getAccounts = async () => {
 }
 
 const getExpensesByMonth = async (month) => {
-  const data = await fetchRequest(`/expenses?month=2021-${month.toString().padStart(2, '0')}`);
+  const data = await fetchRequest(`/expenses?month=${month}`);
   return data;
 }
 
@@ -157,20 +157,6 @@ const formatMoney = (num, symbol = '$') => {
   return `${symbol}${num.toFixed(2).toLocaleString()}`;
 }
 
-const handleSwitchView = async (e) => {
-  const target = e.target.id;
-  if (target === 'btn-show-all') {
-    expenses = await getExpenses();
-  } else {
-    let month = (new Date().getUTCMonth()) + 1;
-    expenses = await getExpensesByMonth(month);
-  }
-  if (expenses.length > 0) return showExpenses(expenses);
-
-  els.btnShowAll.classList.add('hide');
-  els.btnShowMonth.classList.add('hide');
-}
-
 const createCategoryDatalist = () => {
   let categories = expenses.reduce((categoriesMap, expense) => {
     if (categoriesMap.indexOf(expense.category) === -1) {
@@ -187,8 +173,6 @@ const createCategoryDatalist = () => {
 }
 
 const showNoExpenses = () => {
-  // Hide buttons
-  els.btnShowAll.classList.add('hide');
   // Show no expenses found message
   const div = document.createElement('div');
   div.classList.add('no-expenses');
@@ -210,15 +194,73 @@ const populateAccounts = async () => {
   })
 }
 
+const populateMonths = () => {
+  const monthsMap = getMonthsMap();
+
+  for (let year in monthsMap) {
+    const months = monthsMap[year];
+    months.forEach(month => {
+      const monthString = getMonthString(year, month).format('MMMM YYYY');
+      const option = document.createElement('option');
+      option.value = getMonthString(year, month);
+      option.textContent = monthString;
+      els.selMonthPicker.appendChild(option);
+    })
+  }
+}
+
+const getMonthString = (year = dayjs().year(), month = dayjs().month() + 1) => {
+  return dayjs(`${year}-${month.toString().padStart(2, '0')}-01`);
+}
+
+const getMonthsMap = () => {
+  let monthsMap = {};
+
+  expenses.forEach(expense => {
+    let date = dayjs(expense.date);
+    let month = date.month();
+    let year = date.year();
+
+    if (year in monthsMap) {
+      if (monthsMap[year].indexOf(month + 1) === -1) {
+        monthsMap[year].push(month + 1);
+      }
+    } else {
+      monthsMap[year] = [];
+      monthsMap[year].push(month + 1);
+    }
+  });
+  console.log(monthsMap)
+  return monthsMap;
+}
+
+const handleMonthChange = async () => {
+  let selMonth = els.selMonthPicker.value;
+
+  // If all, load expenses from all endpoint
+  if (selMonth === 'all') {
+    showExpenses(await getExpenses());
+    return;
+  }
+  // else load expenses for that month
+  showExpenses(await getExpensesByMonth(selMonth));
+}
+
+const addEventListeners = () => {
+  els.selMonthPicker.addEventListener('change', handleMonthChange);
+}
+
 const init = async () => {
   expenses = await getExpenses();
-  els.btnShowAll.addEventListener('click', handleSwitchView);
-  els.btnShowMonth.addEventListener('click', handleSwitchView);
+  if (expenses.length === 0) return showNoExpenses();
+  addEventListeners();
   createCategoryDatalist();
   populateAccounts();
-  if (expenses.length > 0) return showExpenses(expenses);
-  showNoExpenses();
+  populateMonths();
 
+  let currMonth = getMonthString();
+  els.selMonthPicker.value = currMonth;
+  handleMonthChange();
 }
 
 init();

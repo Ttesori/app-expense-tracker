@@ -21,7 +21,7 @@ const fetchRequest = async (uri, method, body) => {
 
 const getExpensesByMonth = async (month = dayjs().month()) => {
   const data = await fetchRequest(`/expenses?month=2021-${month.toString().padStart(2, '0')}`);
-  return data;
+  return await data;
 }
 
 const showNoReports = () => {
