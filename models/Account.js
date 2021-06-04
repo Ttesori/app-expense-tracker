@@ -9,6 +9,6 @@ const AccountSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: true
   },
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Account', AccountSchema);

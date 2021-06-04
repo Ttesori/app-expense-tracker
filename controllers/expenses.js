@@ -19,9 +19,9 @@ module.exports = {
             $gte: dateStart.format(DATE_FORMAT),
             $lte: dateEnd.format(DATE_FORMAT)
           }
-        }).populate('account_id').sort({ date: -1 })
+        }).populate('account_id').sort({ date: 'desc', createdAt: 'desc' })
       } else {
-        results = await Expense.find({ user_id: user_id }).sort({ date: -1 }).populate('account_id')
+        results = await Expense.find({ user_id: user_id }).populate('account_id').sort({ date: 'desc', createdAt: 'desc' })
       }
       res.status(200).json(results);
     } catch (err) {

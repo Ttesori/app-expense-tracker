@@ -1,10 +1,25 @@
-const fetchRequest = async (uri, payload) => {
-  if (!payload) {
+// const fetchRequest = async (uri, method, body) => {
+//   if (!method) {
+//     let resp = await fetch(uri);
+//     return await resp.json()
+//   }
+//   let resp = await fetch(uri, payload);
+//   return await resp.status;
+// }
+
+const fetchRequest = async (uri, method, body) => {
+  if (!method) {
     let resp = await fetch(uri);
     return await resp.json()
   }
-  let resp = await fetch(uri, payload);
-  return await resp.status;
+  let resp = await fetch(uri, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  return await resp;
 }
 
 const getExpenses = async () => {

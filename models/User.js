@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: '$'
   }
-});
+}, { timestamps: true });
 
 // Password hash middleware.
 UserSchema.pre('save', function save(next) {
