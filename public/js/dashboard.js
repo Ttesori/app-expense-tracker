@@ -117,6 +117,7 @@ const createTableBodyRow = (expense) => {
 const addEditEventListeners = () => {
   let editButtons = document.querySelectorAll('.btn-expense-edit');
   editButtons.forEach(button => button.addEventListener('click', handleEditExpense));
+  editButtons.forEach(button => button.addEventListener('touchstart', handleEditExpense));
 
 }
 
