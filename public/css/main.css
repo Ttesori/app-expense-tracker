@@ -6,10 +6,14 @@
 :root {
   --color-secondary: #24545e;
   --color-primary: #20cc94;
+  --color-light: #f8f9fa;
+  --font-accent: 'Roboto Slab', serif;
+  --font-primary: 'Open Sans', sans-serif;
+  font-size: 14px;
 }
 body {
-  background: #f8f9fa;
   color: var(--color-secondary);
+  font-family: var(--font-primary), sans-serif;
 }
 
 a {
@@ -20,19 +24,25 @@ h1,
 h2,
 h3 {
   font-family: 'Roboto Slab', serif;
-  font-size: 2rem;
-}
-
-h2 {
   font-size: 1.7rem;
 }
 
-h3 {
+h2 {
   font-size: 1.4rem;
 }
 
-.bg-primary {
+h3 {
+  font-size: 1.2rem;
+}
+
+.bg-primary,
+.btn-primary {
   background: var(--color-primary) !important;
+}
+
+.btn-primary {
+  border: 1px solid var(--color-primary);
+  font-family: var(--font-primary);
 }
 
 .bg-secondary {
@@ -58,19 +68,20 @@ img.et-logo {
 }
 
 .et-menu-toggle {
-  color: var(--color-secondary);
+  color: rgba(36, 84, 94, 0.5);
   top: 0.1rem;
   right: 0.5rem;
   position: absolute;
   font-size: 1.3rem;
   z-index: 9;
-}
-
-.et-menu-toggle.open {
-  color: #fff;
+  transition: all 0.2s;
 }
 
 .et-menu-toggle:hover {
+  color: var(--color-secondary);
+}
+
+.et-menu-toggle.open {
   color: #fff;
 }
 
@@ -82,13 +93,21 @@ img.et-logo {
   display: flex;
   flex-direction: column;
   z-index: 2;
-  transition: all 1s;
+  box-shadow: 0px 0px 5px rgba(36, 84, 94, 0.3);
+  padding: 0.5rem 0;
+}
+
+.et-nav .fa {
+  margin-right: 0.5rem;
 }
 
 .et-nav a {
   color: #fff;
-  padding: 0.5rem;
+  padding: 0.6rem;
   text-decoration: none;
+  font-family: var(--font-accent);
+  font-size: 1.1rem;
+  transition: all 0.2s;
 }
 
 .et-nav a:hover {
@@ -104,20 +123,301 @@ img.et-logo {
 }
 
 .et-main {
-  padding: 2rem 1.5rem;
+  padding: 2rem 1rem;
   background: #fff;
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); */
+  min-height: 75vh;
 }
 
-.et-login {
-  margin: 0 auto;
-  max-width: 500px;
-  -webkit-box-shadow: 0px 0px 10px rgba(36, 84, 94, 0.1);
-  box-shadow: 0px 0px 10px rgba(36, 84, 94, 0.1);
-  padding: 0.5rem;
+.no-expenses {
+  font-style: italic;
+}
+
+.et-filters {
+  background: var(--color-light);
+  border: 1px solid rgba(36, 84, 94, 0.1);
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.et-filters #sel-choose-month {
+  color: var(--color-secondary);
+  border: 1px solid rgba(36, 84, 94, 0.2);
+}
+
+.et-filters #search {
+  margin-bottom: 0.5rem;
+  text-align: center;
+  border: 1px solid rgba(36, 84, 94, 0.15);
+}
+
+.et-filters #search::placeholder {
+  color: rgba(36, 84, 94, 0.5);
+}
+
+.filter-month {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-month label {
+  width: 43%;
+  text-align: center;
+  font-family: var(--font-accent);
+}
+
+.filter-month select {
+  width: 54%;
+  border: 1px solid #24545e;
+}
+
+.et-page-title {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid rgba(36, 84, 94, 0.1);
+}
+
+.btn-add,
+.btn-update-profile {
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 0.25rem 0.5rem;
+  margin-left: 0.25rem;
+  font-family: var(--font-accent);
+  background: #fff;
+  border-radius: 0.5rem;
+  transform: translateY(-3px);
+  font-size: 1rem;
 }
 
 .col-act,
 .col-cat {
   display: none;
+}
+
+.et-table {
+  border-top: 1px solid rgba(36, 84, 94, 0.1);
+}
+
+.et-table thead tr {
+  display: none;
+}
+
+.et-table thead th {
+  color: var(--color-secondary);
+  border-bottom: 2px solid rgba(36, 84, 94, 0.2) !important;
+}
+
+.et-table tbody td {
+  padding: 0.7rem 0.6rem;
+  color: var(--color-secondary);
+}
+
+.et-table .col-amt {
+  text-align: right;
+  background: var(--color-light);
+}
+
+.et-table .col-btn {
+  text-align: center;
+  width: 23%;
+}
+
+.et-table .col-date {
+  width: 13%;
+}
+
+.et-table .col-desc {
+  width: 41%;
+}
+
+.et-table .col-amt {
+  width: 23%;
+}
+
+.btn-expense-edit,
+.btn-expense-del,
+.btn-account-edit,
+.btn-account-del {
+  color: rgba(36, 84, 94, 0.25);
+  cursor: pointer;
+  padding: 0.2rem 0.1rem;
+  transition: all 0.2s;
+}
+
+.btn-expense-edit:hover,
+.btn-account-edit:hover {
+  color: var(--color-primary);
+}
+
+.btn-expense-del:hover,
+.btn-account-del:hover {
+  color: #f06292;
+}
+
+.modal-title {
+  font-family: var(--font-accent);
+}
+
+.modal-body {
+  padding-top: 0;
+}
+
+.modal-body .form-label {
+  margin: 0.5rem 0rem 0.25rem;
+  padding: 0;
+  font-family: var(--font-accent);
+}
+
+.et-footer {
+  background: var(--color-primary);
+  color: var(--color-secondary);
+  font-family: var(--font-accent);
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 2px solid var(--color-secondary);
+}
+
+.et-footer a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(36, 84, 94, 0.2);
+}
+
+/* Accounts-Page Specific */
+.et-accounts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.et-accounts-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(36, 84, 94, 0.15);
+  display: flex;
+  justify-content: space-between;
+}
+
+.act-desc {
+}
+
+.act-count {
+}
+
+.act-btns {
+}
+
+/* Reports Page */
+.report-container {
+  margin-top: 1rem;
+}
+
+.no-reports {
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+  color: rgba(36, 84, 94, 0.5);
+  border: 3px dashed rgba(36, 84, 94, 0.1);
+  border-radius: 1rem;
+}
+
+.no-reports .fa {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+  color: rgba(36, 84, 94, 0.2);
+}
+
+/* Profile Styles */
+.profile-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.profile-container fieldset {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.profile-container label {
+  width: 45%;
+}
+
+.profile-container input,
+.profile-container select {
+  width: 55%;
+}
+
+.btn-update-profile {
+  padding: 0.5rem 0.7rem;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  width: 85%;
+  align-self: center;
+}
+
+/* Login */
+.et-login {
+  margin: 2rem auto;
+  max-width: 500px;
+  box-shadow: 0px 0px 10px rgba(36, 84, 94, 0.1);
+  padding: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.container {
+  min-height: 65vh;
+}
+
+.et-login .card-title {
+  font-family: var(--font-accent);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.et-login .form-label {
+  margin-top: 1rem;
+}
+
+.et-login fieldset {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.et-btn-login,
+.et-btn-register {
+  font-family: var(--font-accent);
+  background: var(--color-secondary);
+  color: #fff;
+  border: 0;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  border-radius: 0.5rem;
+}
+
+/* Register */
+.et-register h1 {
+  margin-bottom: 0.5rem;
+}
+.et-register fieldset {
+  margin: 0;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.et-register .et-btns-fieldset {
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1rem;
 }

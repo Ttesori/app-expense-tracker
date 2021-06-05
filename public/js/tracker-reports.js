@@ -5,15 +5,21 @@ const els = {
 }
 
 const showNoReports = () => {
+  els.monthSwitcherEl.classList.add('hide');
   const div = document.createElement('div');
   div.classList.add('no-reports');
-  div.textContent = 'No reports available'
+  div.innerHTML = `
+  <i class="fa fa-question-circle"></i>
+  <h3>No reports available.</h3>
+  <p>Add expenses to generate reports.</p>
+  `;
   els.reportsEl.appendChild(div);
 }
 
 const showReport = (expenses, month) => {
   // CLear prev report
   els.reportsEl.innerHTML = '';
+  els.monthSwitcherEl.classList.remove('hide');
   els.monthSwitcherEl.value = month;
 
   // get total spent for month

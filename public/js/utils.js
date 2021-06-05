@@ -95,7 +95,7 @@ const handleToggler = (e) => {
     return;
   }
 
-  console.log('close menu');
+  // close menu
   menuToggler.innerHTML = '<i class="fa fa-bars"></i>';
   menuToggler.classList.remove('open');
   menuEl.classList.add('hide');

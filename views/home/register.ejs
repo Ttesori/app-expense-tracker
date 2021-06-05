@@ -1,7 +1,7 @@
 <%- include('../partials/_head.ejs') %>
 
   <div class="container">
-    <h1>Register</h1>
+
     <% if (locals.messages.errors) { %>
       <% messages.errors.forEach( el=> { %>
         <div class="alert alert-danger">
@@ -9,8 +9,9 @@
         </div>
         <% }) %>
           <% } %>
-            <div class="card">
+            <div class="card et-login et-register">
               <div class="card-body">
+                <h1 class="et-page-title">Register</h1>
                 <form method="post" action="/register">
                   <fieldset>
                     <label class="form-label">Email</label>
@@ -24,8 +25,12 @@
                     <label class="form-label">Confirm Password</label>
                     <input type="password" name="confirmPassword" class="form-control">
                   </fieldset>
-                  <button class="btn btn-light">Register</button>
-                  <a href="/">Sign In</a>
+                  <fieldset class="et-btns-fieldset">
+                    <a href="/">Sign In</a>
+                    <button class="et-btn-register">Register</button>
+                  </fieldset>
+
+
                 </form>
               </div>
             </div>

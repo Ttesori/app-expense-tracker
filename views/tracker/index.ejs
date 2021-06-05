@@ -6,72 +6,77 @@
     }
   </style>
   <main class="et-main container">
-    <h1>Expenses</h1>
-    <input type="text" placeholder="Search" id="search">
-    <div class="expenses-container">
-      <h2 class="expenses-desc">
-        <select id="sel-choose-month">
+
+
+    <div class="et-filters">
+      <input type="text" placeholder="Type here to search..." id="search" class="form-control">
+
+      <section class="filter-month">
+        <label>Show Month: </label>
+        <select id="sel-choose-month" class="form-select">
           <option value="all">All Expenses</option>
         </select>
-      </h2>
-
-      <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal">Add New Expense</button>
-
-      <section id="expenses"></section>
-
+      </section>
     </div>
 
-
-    <div class="modal fade" tabindex="-1" id="add-modal">
-      <div class="modal-dialog">
-        <form class="modal-content" method="post" action="/expenses" id="expenses-form" name="expenses-form">
-          <div class="modal-header">
-            <h5 class="expenses-form-title modal-title">Add New Expense</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="form-validation"></div>
-            <fieldset>
-              <label class="form-label">Date</label>
-              <input type="date" name="expense_date" class="date-expense_date form-control" required>
-            </fieldset>
-            <fieldset>
-              <label class="form-label">Account</label>
-              <select name="expense_account" class="txt-expense_acc form-select" id="expense_account" required>
-              </select>
-
-            </fieldset>
-            <fieldset>
-              <label class="form-label">Expense Description</label>
-              <input type="text" name="expense_description" class="txt-expense_desc form-control"
-                placeholder="Enter expense description..." required>
-            </fieldset>
-            <fieldset>
-              <label class="form-label">Amount</label>
-              <input type="number" min="0" step=".01" name="expense_amount" class="number-expense_amt form-control"
-                placeholder="Enter expense amount..." required>
-            </fieldset>
-            <fieldset>
-              <label class="form-label">Category</label>
-              <input type="text" name="expense_category" class="txt-expense_category form-control"
-                list="category_datalist" placeholder="Enter expense category..." required>
-            </fieldset>
-            <input type="hidden" class="hidden-id" name="_id" value="">
-
-            <datalist id="category_datalist"></datalist>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn-expenses_submit btn btn-primary">Add New Expense</button>
-          </div>
-
-        </form>
-      </div>
-    </div>
-
-
-
+    <h1 class="et-page-title">Expenses <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal"><i
+          class="fa fa-plus"></i>
+        Add New</button>
+    </h1>
+    <h2 class="expenses-desc"></h2>
+    <section id="expenses"></section>
   </main>
+
+  <div class="modal fade" tabindex="-1" id="add-modal">
+    <div class="modal-dialog">
+      <form class="modal-content" method="post" action="/expenses" id="expenses-form" name="expenses-form">
+        <div class="modal-header">
+          <h5 class="expenses-form-title modal-title">Add New Expense</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-validation"></div>
+          <fieldset>
+            <label class="form-label">Date</label>
+            <input type="date" name="expense_date" class="date-expense_date form-control" required>
+          </fieldset>
+          <fieldset>
+            <label class="form-label">Account</label>
+            <select name="expense_account" class="txt-expense_acc form-select" id="expense_account" required>
+            </select>
+
+          </fieldset>
+          <fieldset>
+            <label class="form-label">Expense Description</label>
+            <input type="text" name="expense_description" class="txt-expense_desc form-control"
+              placeholder="Enter expense description..." required>
+          </fieldset>
+          <fieldset>
+            <label class="form-label">Amount</label>
+            <input type="number" min="0" step=".01" name="expense_amount" class="number-expense_amt form-control"
+              placeholder="Enter expense amount..." required>
+          </fieldset>
+          <fieldset>
+            <label class="form-label">Category</label>
+            <input type="text" name="expense_category" class="txt-expense_category form-control"
+              list="category_datalist" placeholder="Enter expense category..." required>
+          </fieldset>
+          <input type="hidden" class="hidden-id" name="_id" value="">
+
+          <datalist id="category_datalist"></datalist>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i>
+            Close</button>
+          <button type="submit" class="btn-expenses_submit btn btn-primary"><i class="fa fa-plus"></i> Add New
+            Expense</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
   <script>dayjs.extend(window.dayjs_plugin_utc)</script>

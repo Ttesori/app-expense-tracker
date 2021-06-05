@@ -1,6 +1,6 @@
 <%- include('../partials/_head.ejs') %>
   <div class="container">
-    <div class="card">
+    <div class="card et-login">
       <div class="card-body">
         <h5 class="card-title">Sign In</h5>
         <% if (locals.messages.errors) { %>
@@ -15,8 +15,12 @@
                   <input type="email" name="email" class="form-control">
                   <label class="form-label">Password</label>
                   <input type="password" name="password" class="form-control">
-                  <button class="btn btn-light">Sign In</button>
-                  <a href="/register">Create Account</a>
+                  <fieldset>
+                    <a href="/register">Create Account</a>
+                    <button class="et-btn-login">Sign In</button>
+                  </fieldset>
+
+
                 </form>
       </div>
     </div>

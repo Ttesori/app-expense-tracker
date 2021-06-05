@@ -17,15 +17,24 @@ const showAccounts = (accounts) => {
 
   els.accountsEl.innerHTML = '';
   const ul = document.createElement('ul');
+  ul.classList.add('et-accounts-list')
   for (let account_id in accounts) {
     const account = accounts[account_id];
     const li = document.createElement('li');
+    li.classList.add('et-accounts-item');
     li.setAttribute('data-id', account._id);
     li.innerHTML = `
-    ${account.desc}
-    (${account.count})
-    <button class="btn-account-edit">Edit</button>
-    ${account.count === 0 ? '<button class="btn-account-del">X</button>' : ''}
+    <span class="act-desc">${account.desc}
+    <span class="act-count" title="Number of expenses">(${account.count})</span>
+    </span>
+    <span class="act-btns">
+    <a class="btn-account-edit" title="Edit Account">
+    <i class="fa fa-edit"></i></a>
+    ${account.count === 0 ? `
+    <a class="btn-account-del" title="Delete Account">
+    <i class="fa fa-times"></i></a>
+    ` : ''}
+    </span>
     `;
     ul.appendChild(li);
   }
@@ -45,7 +54,8 @@ const addDeleteEventListeners = () => {
 }
 
 const handleEdit = (e) => {
-  const btnId = e.path[1].dataset.id;
+  const btnId = e.path[3].dataset.id;
+
   // Get expense from array with that ID
   const account = accounts.find(account => account._id === btnId);
   // fill in form with data
@@ -53,7 +63,7 @@ const handleEdit = (e) => {
 }
 
 const handleDelete = (e) => {
-  const btnId = e.path[1].dataset.id;
+  const btnId = e.path[3].dataset.id;
 
   // send delete request with that ID
   let answer = confirm('Are you sure you want to remove this account?')
@@ -112,7 +122,7 @@ const showNoAccounts = () => {
 
 
 const init = async () => {
-  const accounts = await getAccounts();
+  accounts = await getAccounts();
   if (accounts.length === 0) return showNoAccounts();
   showAccounts(accounts);
 }
