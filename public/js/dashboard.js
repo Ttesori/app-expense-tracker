@@ -107,8 +107,8 @@ const createTableBodyRow = (expense) => {
   const td_btn = document.createElement('td');
   td_btn.classList.add('col-btn');
   td_btn.innerHTML = `
-  <a class="btn-expense-edit"><i class="fa fa-edit"></i></a>
-  <a class="btn-expense-del"> <i class="fa fa-times"></i></a> `;
+  <a class="btn-expense-edit" href="#"><i class="fa fa-edit"></i></a>
+  <a class="btn-expense-del" href="#"> <i class="fa fa-times"></i></a> `;
   tr.appendChild(td_btn);
 
   return tr;
@@ -117,16 +117,17 @@ const createTableBodyRow = (expense) => {
 const addEditEventListeners = () => {
   let editButtons = document.querySelectorAll('.btn-expense-edit');
   editButtons.forEach(button => button.addEventListener('click', handleEditExpense));
-  editButtons.forEach(button => button.addEventListener('touchstart', handleEditExpense));
+
 }
 
 const addDeleteEventListeners = () => {
   let delButtons = document.querySelectorAll('.btn-expense-del');
   delButtons.forEach(button => button.addEventListener('click', handleDeleteExpense));
-  delButtons.forEach(button => button.addEventListener('touchstart', handleDeleteExpense));
+
 }
 
 const handleEditExpense = (e) => {
+  e.preventDefault();
   const btnId = e.path[3].dataset.id;
   // Get expense from array with that ID
   const expense = expenses.find(expense => expense._id === btnId);
@@ -135,8 +136,8 @@ const handleEditExpense = (e) => {
 }
 
 const handleDeleteExpense = (e) => {
+  e.preventDefault();
   const btnId = e.path[3].dataset.id;
-
   // send delete request with that ID
   let answer = confirm('Are you sure you want to remove this expense?')
   if (answer) {
