@@ -130,6 +130,11 @@ img.et-logo {
   background: #fff;
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); */
   min-height: 75vh;
+  width: 100%;
+}
+
+.et-content {
+  position: relative;
 }
 
 .no-expenses {
@@ -145,6 +150,7 @@ img.et-logo {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .et-filters #sel-choose-month {
@@ -156,6 +162,7 @@ img.et-logo {
   margin-bottom: 0.5rem;
   text-align: center;
   border: 1px solid rgba(36, 84, 94, 0.15);
+  max-width: 350px;
 }
 
 .et-filters #search::placeholder {
@@ -165,18 +172,20 @@ img.et-logo {
 .filter-month {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .filter-month label {
-  width: 43%;
-  text-align: center;
+  text-align: right;
   font-family: var(--font-accent);
+  margin-bottom: 0;
+  margin-right: 0.5rem;
 }
 
 .filter-month select {
-  width: 54%;
   border: 1px solid #24545e;
+  max-width: 200px;
+  flex: 1;
 }
 
 .et-page-title {
@@ -201,10 +210,6 @@ img.et-logo {
 .col-act,
 .col-cat {
   display: none;
-}
-
-.et-table {
-  border-top: 1px solid rgba(36, 84, 94, 0.1);
 }
 
 .et-table thead tr {
@@ -306,18 +311,10 @@ img.et-logo {
   justify-content: space-between;
 }
 
-.act-desc {
-}
-
-.act-count {
-}
-
-.act-btns {
-}
-
 /* Reports Page */
 .report-container {
   margin-top: 1rem;
+  font-size: 1.1rem;
 }
 
 .no-reports {
@@ -334,6 +331,54 @@ img.et-logo {
   display: block;
   margin-bottom: 1rem;
   color: rgba(36, 84, 94, 0.2);
+}
+
+.page-reports .table {
+  max-width: 400px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(36, 84, 94, 0.1);
+}
+
+.et-reports-table td {
+  color: var(--color-secondary);
+  text-align: center;
+}
+
+td.col_name {
+  width: 45%;
+  text-align: left;
+}
+
+.col_amt {
+  width: 30%;
+  background: var(--color-light) !important;
+}
+
+.col_per {
+  width: 25%;
+  position: relative;
+}
+
+.et-report-percentage {
+  position: relative;
+  z-index: 2;
+  padding: 0 0.5rem;
+}
+
+.et-report-percentage-bar {
+  position: absolute;
+  background: rgba(32, 204, 148, 0.7);
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.et-section-header {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
 }
 
 /* Profile Styles */
@@ -429,5 +474,165 @@ img.et-logo {
   margin-top: 1rem;
 }
 
-@media screen (min-size: 576px) {
+@media screen and (min-width: 400px) {
+  .page-reports .et-page-title {
+    padding-bottom: 1rem;
+  }
+  #month-switcher {
+    position: absolute;
+    width: 250px;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  :root {
+  }
+
+  .et-main {
+    width: 93%;
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  .et-filters {
+    flex-direction: row;
+  }
+
+  .et-filters #search {
+    width: 50%;
+    margin: 0;
+  }
+  .et-filters .filter-month {
+    width: 50%;
+    justify-content: flex-end;
+    margin: 0;
+  }
+
+  .filter-month .form-label {
+    text-align: right;
+    width: auto;
+    margin: 0 0.5rem 0 1rem;
+  }
+  .filter-month #sel-choose-month {
+    flex: 1;
+  }
+  .col-cat,
+  .col-act {
+    display: table-cell;
+  }
+
+  th.col-amt {
+    text-align: center;
+  }
+
+  .et-table td[class*='col-'],
+  .et-table th[class*='col-'] {
+    width: auto;
+  }
+
+  .et-table td.col-desc {
+    min-width: 35%;
+  }
+
+  .et-table thead tr {
+    display: table-row;
+  }
+
+  .et-main {
+    max-width: 750px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    font-size: 16px;
+  }
+  body {
+    background: var(--color-light);
+  }
+  .et-main {
+    width: 90%;
+    max-width: 980px;
+    margin: 1.5rem auto;
+    background: #fff;
+    box-shadow: 0px 0px 7px rgba(36, 84, 94, 0.3);
+    padding: 0;
+    border-radius: 0.5rem;
+    min-height: 50vh;
+  }
+
+  .et-content {
+    padding: 2rem;
+  }
+
+  .page-dashboard .et-content {
+    padding: 0 2rem 1rem;
+  }
+
+  .et-filters {
+    border-radius: 0.5rem;
+    border: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: var(--color-light);
+    border-bottom: 1px solid rgba(36, 84, 94, 0.1);
+  }
+
+  .filter-month .form-label {
+    max-width: 150px;
+  }
+
+  .filter-month {
+    max-width: 350px;
+  }
+
+  .et-menu-toggle {
+    display: none;
+  }
+
+  .et-header {
+    padding-bottom: 0;
+  }
+
+  .et-nav {
+    position: relative;
+    left: 0 !important;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0;
+    margin-top: 1rem;
+  }
+
+  .et-nav a {
+    font-size: 1rem;
+    padding: 0.65rem 1rem;
+  }
+
+  .et-nav a .fa {
+    margin-right: 0.25rem;
+  }
+
+  /* Reports */
+
+  #month-switcher {
+    top: 1.5rem;
+    right: 2rem;
+  }
+
+  .page-reports .et-reports-table {
+    max-width: 600px;
+  }
+
+  /* Profile */
+  .profile-container {
+    max-width: 600px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+}
+
+@media screen and (min-width: 1200px) {
 }

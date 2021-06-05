@@ -1,30 +1,23 @@
 <%- include('../partials/_head.ejs') %>
-  <style>
-    .hide {
-      position: absolute;
-      left: -9999px;
-    }
-  </style>
   <main class="et-main container">
-
-
     <div class="et-filters">
       <input type="text" placeholder="Type here to search..." id="search" class="form-control">
 
       <section class="filter-month">
-        <label>Show Month: </label>
+        <label class="form-label">Show Month: </label>
         <select id="sel-choose-month" class="form-select">
           <option value="all">All Expenses</option>
         </select>
       </section>
     </div>
-
-    <h1 class="et-page-title">Expenses <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal"><i
-          class="fa fa-plus"></i>
-        Add New</button>
-    </h1>
-    <h2 class="expenses-desc"></h2>
-    <section id="expenses"></section>
+    <section class="et-content">
+      <h1 class="et-page-title">Expenses <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal"><i
+            class="fa fa-plus"></i>
+          Add New</button>
+      </h1>
+      <h2 class="expenses-desc"></h2>
+      <section id="expenses"></section>
+    </section>
   </main>
 
   <div class="modal fade" tabindex="-1" id="add-modal">

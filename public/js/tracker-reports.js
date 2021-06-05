@@ -34,6 +34,7 @@ const showReport = (expenses, month) => {
   // totals
   const total_fmt = formatMoney(total);
   const h3 = document.createElement('h3');
+  h3.classList.add('et-section-header')
   h3.textContent = `Total Expenses: ${total_fmt}`;
   els.reportsEl.appendChild(h3);
 }
@@ -41,16 +42,45 @@ const showReport = (expenses, month) => {
 const buildReportSectionCategory = (expenses, total) => {
   const h3 = document.createElement('h3');
   h3.textContent = 'Expenses By Category';
+  h3.classList.add('et-section-header');
   els.reportsEl.appendChild(h3);
 
-  const ul = document.createElement('ul');
+  const table = document.createElement('table');
+  table.classList.add('table');
+  table.classList.add('et-reports-table');
+  const tbody = document.createElement('tbody');
   let categoriesMap = getCategoriesMap(expenses);
   categoriesMap.forEach(category => {
-    const li = document.createElement('li');
-    li.textContent = `${category.name}: ${formatMoney(category.amount)} (${formatPercent(category.amount, total)})`;
-    ul.appendChild(li);
+    const tr = createReportRow(category, total)
+    tbody.appendChild(tr);
   })
-  els.reportsEl.appendChild(ul);
+  table.appendChild(tbody);
+  els.reportsEl.appendChild(table);
+}
+
+const createReportRow = (data, total) => {
+  const tr = document.createElement('tr');
+  const td_name = document.createElement('td')
+  td_name.textContent = data.name;
+  td_name.classList.add('col_name');
+  tr.appendChild(td_name);
+  const td_amt = document.createElement('td');
+  td_amt.textContent = formatMoney(data.amount);
+  td_amt.classList.add('col_amt');
+  tr.appendChild(td_amt);
+  const td_per = document.createElement('td');
+  td_per.classList.add('col_per');
+  const span_per = document.createElement('span');
+  span_per.textContent = formatPercent(data.amount, total);
+  span_per.classList.add('et-report-percentage');
+  td_per.appendChild(span_per);
+
+  const span_bar = document.createElement('span');
+  span_bar.classList.add('et-report-percentage-bar');
+  span_bar.style.width = formatPercent(data.amount, total);
+  td_per.appendChild(span_bar);
+  tr.appendChild(td_per);
+  return tr;
 }
 
 const getCategoriesMap = (expenses) => {
@@ -72,18 +102,20 @@ const getCategoriesMap = (expenses) => {
 const buildReportSectionAccount = (expenses, total) => {
   const h3 = document.createElement('h3');
   h3.textContent = 'Expenses By Account';
+  h3.classList.add('et-section-header');
   els.reportsEl.appendChild(h3);
 
-  const ul = document.createElement('ul');
+  const table = document.createElement('table');
+  table.classList.add('table');
+  table.classList.add('et-reports-table');
+  const tbody = document.createElement('tbody');
   let accountsMap = getAccountsMap(expenses);
   accountsMap.forEach(account => {
-    const li = document.createElement('li');
-    li.textContent = `${account.name}: 
-    ${formatMoney(account.amount)} 
-    (${formatPercent(account.amount, total)})`;
-    ul.appendChild(li)
+    const tr = createReportRow(account, total);
+    tbody.appendChild(tr)
   });
-  els.reportsEl.appendChild(ul);
+  table.appendChild(tbody);
+  els.reportsEl.appendChild(table);
 }
 
 const getAccountsMap = (expenses) => {

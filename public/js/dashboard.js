@@ -62,11 +62,12 @@ const createTableHeaderRow = () => {
   th_act.classList.add('col-act');
   tr.appendChild(th_act);
   const th_cat = document.createElement('th');
-  th_cat.textContent = 'Account';
+  th_cat.textContent = 'Category';
   th_cat.classList.add('col-cat');
   tr.appendChild(th_cat);
   const th_amt = document.createElement('th');
   th_amt.textContent = 'Amount';
+  th_amt.classList.add('col-amt');
   tr.appendChild(th_amt);
   const th_btns = document.createElement('th');
   tr.appendChild(th_btns);

@@ -1,18 +1,15 @@
 <%- include('../partials/_head.ejs') %>
-  <style>
-    .hide {
-      position: absolute;
-      left: -9999px;
-    }
-  </style>
   <div class="et-main">
-    <h1 class="et-page-title">Accounts
-      <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal">
-        <i class="fa fa-plus"></i>
-        Add New</button>
-    </h1>
+    <section class="et-content">
+      <h1 class="et-page-title">Accounts
+        <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal">
+          <i class="fa fa-plus"></i>
+          Add New</button>
+      </h1>
 
-    <section id="accounts"></section>
+      <section id="accounts"></section>
+    </section>
+
 
     <div class="modal fade" tabindex="-1" id="add-modal">
       <div class="modal-dialog">
