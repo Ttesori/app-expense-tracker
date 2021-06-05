@@ -71,10 +71,11 @@ img.et-logo {
 
 .et-menu-toggle {
   color: rgba(36, 84, 94, 0.5);
-  top: 0.1rem;
-  right: 0.5rem;
+  padding: 0.25rem 0.65rem;
+  top: 0;
+  right: 0;
   position: absolute;
-  font-size: 1.3rem;
+  font-size: 1.75rem;
   z-index: 9;
   transition: all 0.2s;
 }
@@ -421,6 +422,10 @@ img.et-logo {
 .et-register .et-btns-fieldset {
   flex-direction: row;
   align-items: center;
+  margin-top: 1rem;
+}
+
+.alert {
   margin-top: 1rem;
 }
 

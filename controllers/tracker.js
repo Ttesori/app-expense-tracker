@@ -24,6 +24,7 @@ module.exports = {
     res.render('tracker/index.ejs', {
       title: 'User Dashboard',
       className: 'page-dashboard',
+      user: req.user,
       user_id: req.user._id
     })
   },
@@ -31,6 +32,7 @@ module.exports = {
     res.render('tracker/accounts.ejs', {
       title: 'User Accounts',
       className: 'page-accounts',
+      user: req.user,
       user_id: req.user._id,
     });
   },
@@ -38,6 +40,7 @@ module.exports = {
     res.render('tracker/reports.ejs', {
       title: 'Reports',
       className: 'page-reports',
+      user: req.user,
       user_id: req.user._id
     });
   },

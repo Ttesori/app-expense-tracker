@@ -6,7 +6,8 @@ module.exports = {
   getHome: (req, res) => {
     res.render('home/index.ejs', {
       title: 'Home',
-      className: 'page-home'
+      className: 'page-home',
+      user: false
     });
   },
   loginUser: (req, res, next) => {
@@ -36,7 +37,8 @@ module.exports = {
   getRegisterUser: (req, res) => {
     res.render('home/register.ejs', {
       title: 'Register',
-      className: 'page-register'
+      className: 'page-register',
+      user: false
     });
   },
   registerUser: (req, res, next) => {
