@@ -423,3 +423,6 @@ img.et-logo {
   align-items: center;
   margin-top: 1rem;
 }
+
+@media screen (min-size: 576px) {
+}
