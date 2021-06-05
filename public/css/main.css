@@ -1,2 +1,123 @@
+.hide {
+  position: absolute;
+  left: -9999px !important;
+}
+
+:root {
+  --color-secondary: #24545e;
+  --color-primary: #20cc94;
+}
 body {
+  background: #f8f9fa;
+  color: var(--color-secondary);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.7rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
+.bg-primary {
+  background: var(--color-primary) !important;
+}
+
+.bg-secondary {
+  background: var(--color-secondary) !important;
+  color: #fff !important;
+}
+
+.et-header {
+  background-image: radial-gradient(
+    ellipse at center,
+    #26efa7 0%,
+    #20cc94 100%
+  );
+  text-align: center;
+  padding: 1.7rem 0 0.75rem;
+  position: relative;
+  border-bottom: 3px solid var(--color-secondary);
+}
+
+img.et-logo {
+  width: 90%;
+  max-width: 350px;
+}
+
+.et-menu-toggle {
+  color: var(--color-secondary);
+  top: 0.1rem;
+  right: 0.5rem;
+  position: absolute;
+  font-size: 1.3rem;
+  z-index: 9;
+}
+
+.et-menu-toggle.open {
+  color: #fff;
+}
+
+.et-menu-toggle:hover {
+  color: #fff;
+}
+
+.et-nav {
+  background: var(--color-secondary);
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  transition: all 1s;
+}
+
+.et-nav a {
+  color: #fff;
+  padding: 0.5rem;
+  text-decoration: none;
+}
+
+.et-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.et-nav .container {
+  flex-direction: column;
+}
+
+.et-nav .nav-link {
+  color: #fff;
+}
+
+.et-main {
+  padding: 2rem 1.5rem;
+  background: #fff;
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15); */
+}
+
+.et-login {
+  margin: 0 auto;
+  max-width: 500px;
+  -webkit-box-shadow: 0px 0px 10px rgba(36, 84, 94, 0.1);
+  box-shadow: 0px 0px 10px rgba(36, 84, 94, 0.1);
+  padding: 0.5rem;
+}
+
+.col-act,
+.col-cat {
+  display: none;
 }

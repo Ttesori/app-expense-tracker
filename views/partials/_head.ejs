@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/css/main.css">
   <title>
     <%= title %> | ExpenseTracker - A Smarter Way to Track Your Expenses
@@ -14,15 +17,19 @@
 </head>
 
 <body class="<%= className %>">
-  <header class="navbar bg-light mb-5">
-    <div class="container">
-      <h1 class="text-center">ExpenseTracker</h1>
-      <nav class="navbar-nav">
-        <a href="/tracker">My Expenses</a>
-        <a href="/tracker/accounts">Accounts</a>
-        <a href="/tracker/reports">Reports</a>
-        <a href="/tracker/profile">Settings</a>
-        <a href="/logout">Log Out</a>
-      </nav>
-    </div>
+  <header class="et-header">
+
+    <h1 class="text-center"><img src="/img/et-logo-dk.svg" alt="ExpenseTracker Logo" class="et-logo"></h1>
+    <a href="#menu" class="et-menu-toggle">
+      <span class="fa fa-bars"></span>
+    </a>
+    <nav class="et-nav hide" id="menu">
+
+      <a href="/tracker">My Expenses</a>
+      <a href="/tracker/accounts">Accounts</a>
+      <a href="/tracker/reports">Reports</a>
+      <a href="/tracker/profile">Settings</a>
+      <a href="/logout">Log Out</a>
+
+    </nav>
   </header>

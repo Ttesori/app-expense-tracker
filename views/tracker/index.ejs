@@ -5,7 +5,7 @@
       left: -9999px;
     }
   </style>
-  <div class="container">
+  <main class="et-main container">
     <h1>Expenses</h1>
     <input type="text" placeholder="Search" id="search">
     <div class="expenses-container">
@@ -33,28 +33,28 @@
             <div class="form-validation"></div>
             <fieldset>
               <label class="form-label">Date</label>
-              <input type="date" name="expense_date" class="date-expense_date form-control">
+              <input type="date" name="expense_date" class="date-expense_date form-control" required>
             </fieldset>
             <fieldset>
               <label class="form-label">Account</label>
-              <select name="expense_account" class="txt-expense_acc form-select" id="expense_account">
+              <select name="expense_account" class="txt-expense_acc form-select" id="expense_account" required>
               </select>
 
             </fieldset>
             <fieldset>
               <label class="form-label">Expense Description</label>
               <input type="text" name="expense_description" class="txt-expense_desc form-control"
-                placeholder="Enter expense description...">
+                placeholder="Enter expense description..." required>
             </fieldset>
             <fieldset>
               <label class="form-label">Amount</label>
               <input type="number" min="0" step=".01" name="expense_amount" class="number-expense_amt form-control"
-                placeholder="Enter expense amount...">
+                placeholder="Enter expense amount..." required>
             </fieldset>
             <fieldset>
               <label class="form-label">Category</label>
               <input type="text" name="expense_category" class="txt-expense_category form-control"
-                list="category_datalist" placeholder="Enter expense category...">
+                list="category_datalist" placeholder="Enter expense category..." required>
             </fieldset>
             <input type="hidden" class="hidden-id" name="_id" value="">
 
@@ -71,7 +71,7 @@
 
 
 
-  </div>
+  </main>
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
   <script>dayjs.extend(window.dayjs_plugin_utc)</script>

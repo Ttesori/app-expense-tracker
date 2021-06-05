@@ -43,9 +43,10 @@ const formatDate = (date) => {
 }
 
 const formatMoney = (num) => {
+  num = num.toFixed(2);
   const intFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
   //const intFmt = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
-  return intFmt.format(num);
+  return intFmt.format(num).toString();
 }
 
 const formatPercent = (num, total) => {
@@ -79,3 +80,35 @@ const getMonthsMap = (expenses) => {
   });
   return monthsMap;
 }
+
+const handleToggler = (e) => {
+  e.preventDefault();
+  const toOpen = e.path[0].classList.contains('fa-bars');
+  const menuEl = document.querySelector('.et-nav');
+
+  if (toOpen) {
+    // change icon
+    menuToggler.innerHTML = '<i class="fa fa-times"></i>';
+    // remove hide class
+    menuEl.classList.remove('hide');
+    menuToggler.classList.add('open');
+    return;
+  }
+
+  console.log('close menu');
+  menuToggler.innerHTML = '<i class="fa fa-bars"></i>';
+  menuToggler.classList.remove('open');
+  menuEl.classList.add('hide');
+  // Change hamburger to close
+
+
+  // remove hide_menu class
+
+  //
+}
+
+const menuToggler = document.querySelector('.et-menu-toggle');
+menuToggler.addEventListener('click', handleToggler);
+
+
+

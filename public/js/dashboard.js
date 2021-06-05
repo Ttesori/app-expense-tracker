@@ -26,23 +26,68 @@ const els = {
 const showExpenses = (expenses) => {
   if (expenses.length === 0) return;
 
-  els.expensesEl.innerHTML = '';
-  const ul = document.createElement('ul');
-  expenses.forEach(expense => {
-    const li = document.createElement('li');
-    li.setAttribute('data-id', expense._id);
-    li.innerHTML = `
-    ${formatDate(expense.date)} -
-    ${expense.desc} -
-    ${formatMoney(expense.amount)} -
-    ${expense.account_id.desc} -
-    ${expense.category}
-    <button class="btn-expense-edit">Edit</button>
-    <button class="btn-expense-del">X</button>
-    `;
-    ul.appendChild(li);
-  });
-  els.expensesEl.appendChild(ul);
+  const table = document.createElement('table');
+  const thead = document.createElement('thead');
+  table.appendChild(thead);
+  const tr = document.createElement('tr');
+  thead.appendChild(tr);
+  const th_date = document.createElement('th');
+  th_date.textContent = 'Date';
+  tr.appendChild(th_date);
+  const th_desc = document.createElement('th');
+  th_desc.textContent = 'Description';
+  tr.appendChild(th_desc);
+  const th_act = document.createElement('th');
+  th_act.textContent = 'Account';
+  th_act.classList.add('col-act');
+  tr.appendChild(th_act);
+  const th_cat = document.createElement('th');
+  th_cat.textContent = 'Account';
+  th_cat.classList.add('col-cat');
+  tr.appendChild(th_cat);
+  const th_amt = document.createElement('th');
+  th_amt.textContent = 'Amount';
+  tr.appendChild(th_amt);
+  const th_btns = document.createElement('th');
+  tr.appendChild(th_btns);
+
+  const tbody = document.createElement('tbody');
+  table.appendChild(tbody);
+
+  for (let i = 0; i < expenses.length; i++) {
+    const expense = expenses[i];
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-id', expense._id);
+
+    const td_date = document.createElement('td');
+    td_date.textContent = formatDate(expense.date);
+    tr.appendChild(td_date);
+
+    const td_desc = document.createElement('td');
+    td_desc.textContent = expense.desc;
+    tr.appendChild(td_desc);
+
+    const td_cat = document.createElement('td');
+    td_cat.classList.add('col-cat');
+    td_cat.textContent = expense.category;
+    tr.appendChild(td_cat);
+
+    const td_act = document.createElement('td');
+    td_act.classList.add('col-act');
+    td_act.textContent = expense.account_id.desc;
+    tr.appendChild(td_act);
+
+    const td_amt = document.createElement('td');
+    td_amt.textContent = formatMoney(expense.amount);
+    tr.appendChild(td_amt);
+
+    const td_btn = document.createElement('td');
+    td_btn.innerHTML = '<a class="btn-expense-edit">Edit</a><a class="btn-expense-del">X</a>';
+    tr.appendChild(td_btn);
+
+    tbody.appendChild(tr);
+  }
+  els.expensesEl.appendChild(table);
   addEditEventListeners();
   addDeleteEventListeners();
 }
@@ -96,9 +141,10 @@ const deleteExpense = async (id) => {
 
 const fillInEditForm = (expense) => {
   // Set values of form fields
+
   els.expenseForm.date.value = dayjs(expense.date).format('YYYY-MM-DD');
   els.expenseForm.desc.value = expense.desc;
-  els.expenseForm.amt.value = expense.amount;
+  els.expenseForm.amt.value = expense.amount.toFixed(2);
   els.expenseForm.category.value = expense.category;
   els.expenseForm.account.value = expense.account_id._id;
   els.expenseForm.id.value = expense._id;
@@ -149,12 +195,8 @@ const showNoExpenses = () => {
   // Show no expenses found message
   const div = document.createElement('div');
   div.classList.add('no-expenses');
-  div.textContent = 'No expenses found.'
+  div.textContent = 'No expenses found.';
   els.expensesEl.appendChild(div);
-}
-
-const showErrors = () => {
-
 }
 
 const populateAccounts = async () => {
@@ -187,6 +229,9 @@ const populateMonths = async () => {
 }
 
 const handleMonthChange = async () => {
+  // Reset search
+  els.searchEl.value = '';
+
   let selMonth = els.selMonthPicker.value;
 
   // If all, load expenses from all endpoint
