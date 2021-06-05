@@ -82,8 +82,8 @@ const getMonthsMap = (expenses) => {
 }
 
 const handleToggler = (e) => {
-  e.preventDefault();
-  const toOpen = e.path[0].classList.contains('fa-bars');
+
+  const toOpen = e.target.classList.contains('fa-bars');
   const menuEl = document.querySelector('.et-nav');
 
   if (toOpen) {
@@ -92,6 +92,7 @@ const handleToggler = (e) => {
     // remove hide class
     menuEl.classList.remove('hide');
     menuToggler.classList.add('open');
+    e.preventDefault();
     return;
   }
 

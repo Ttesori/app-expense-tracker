@@ -77,7 +77,7 @@ const createTableHeaderRow = () => {
 
 const createTableBodyRow = (expense) => {
   const tr = document.createElement('tr');
-  tr.setAttribute('data-id', expense._id);
+
 
   const td_date = document.createElement('td');
   td_date.textContent = dayjs(expense.date).format('M/D/YY');
@@ -106,6 +106,7 @@ const createTableBodyRow = (expense) => {
 
   const td_btn = document.createElement('td');
   td_btn.classList.add('col-btn');
+  td_btn.setAttribute('data-id', expense._id);
   td_btn.innerHTML = `
   <a class="btn-expense-edit" href="#"><i class="fa fa-edit"></i></a>
   <a class="btn-expense-del" href="#"> <i class="fa fa-times"></i></a> `;
@@ -117,7 +118,6 @@ const createTableBodyRow = (expense) => {
 const addEditEventListeners = () => {
   let editButtons = document.querySelectorAll('.btn-expense-edit');
   editButtons.forEach(button => button.addEventListener('click', handleEditExpense));
-  editButtons.forEach(button => button.addEventListener('touchstart', handleEditExpense));
 
 }
 
@@ -128,23 +128,22 @@ const addDeleteEventListeners = () => {
 }
 
 const handleEditExpense = (e) => {
-  e.preventDefault();
-  const btnId = e.path[3].dataset.id;
+  const btnId = e.target.parentElement.parentElement.dataset.id;
   // Get expense from array with that ID
   const expense = expenses.find(expense => expense._id === btnId);
   // fill in form with data
   fillInEditForm(expense);
+  e.preventDefault();
 }
 
 const handleDeleteExpense = (e) => {
-  e.preventDefault();
-  const btnId = e.path[3].dataset.id;
+  const btnId = e.target.parentElement.parentElement.dataset.id;
   // send delete request with that ID
   let answer = confirm('Are you sure you want to remove this expense?')
   if (answer) {
     deleteExpense(btnId);
   }
-
+  e.preventDefault();
 }
 
 const deleteExpense = async (id) => {
