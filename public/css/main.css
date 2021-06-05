@@ -13,13 +13,18 @@
   --font-primary: 'Open Sans', sans-serif;
   font-size: 14px;
 }
+
 body {
   color: var(--color-secondary);
   font-family: var(--font-primary), sans-serif;
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+html {
+  height: -webkit-fill-available;
 }
 
 a {
