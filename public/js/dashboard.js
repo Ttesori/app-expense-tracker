@@ -117,11 +117,13 @@ const createTableBodyRow = (expense) => {
 const addEditEventListeners = () => {
   let editButtons = document.querySelectorAll('.btn-expense-edit');
   editButtons.forEach(button => button.addEventListener('click', handleEditExpense));
+  editButtons.forEach(button => button.addEventListener('touchstart', handleEditExpense));
 }
 
 const addDeleteEventListeners = () => {
   let delButtons = document.querySelectorAll('.btn-expense-del');
   delButtons.forEach(button => button.addEventListener('click', handleDeleteExpense));
+  delButtons.forEach(button => button.addEventListener('touchstart', handleDeleteExpense));
 }
 
 const handleEditExpense = (e) => {
