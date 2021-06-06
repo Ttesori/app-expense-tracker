@@ -11,9 +11,13 @@
       </section>
     </div>
     <section class="et-content">
-      <h1 class="et-page-title">Expenses <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal"><i
-            class="fa fa-plus"></i>
-          Add New</button>
+      <h1 class="et-page-title">
+        <% if (user.display_name !=='' ) { %>
+          <%= user.display_name + "'s " %>
+            <% } %>
+              Expenses <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal"><i
+                  class="fa fa-plus"></i>
+                Add New</button>
       </h1>
       <h2 class="expenses-desc"></h2>
       <section id="expenses"></section>
@@ -73,6 +77,13 @@
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
   <script>dayjs.extend(window.dayjs_plugin_utc)</script>
+  <script type="text/javascript">
+    const etUserSettings = {
+      dateFormat: <%= user.date_format %>,
+      numberFormat: <%= user.number_format %>,
+      currencySymbol: '<%= user.currency_symbol %>',
+    }
+  </script>
   <script src="/js/utils.js" defer></script>
   <script src="/js/dashboard.js" defer></script>
   <%- include('../partials/_foot.ejs'); %>

@@ -1,11 +1,7 @@
-// const fetchRequest = async (uri, method, body) => {
-//   if (!method) {
-//     let resp = await fetch(uri);
-//     return await resp.json()
-//   }
-//   let resp = await fetch(uri, payload);
-//   return await resp.status;
-// }
+const dateFormat = {
+  1: 'M/D/YY',
+  2: 'D/M/YY'
+}
 
 const fetchRequest = async (uri, method, body) => {
   if (!method) {
@@ -43,9 +39,20 @@ const formatDate = (date) => {
 }
 
 const formatMoney = (num) => {
+  const currencyMap = {
+    '$': 'USD',
+    '€': 'EUR',
+    '£': 'GBP'
+  }
+  const currency = currencyMap[etUserSettings.currencySymbol];
+
   num = num.toFixed(2);
-  const intFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
-  //const intFmt = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+  let intFmt;
+  if (etUserSettings.numberFormat === 1) {
+    intFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: currency });
+    return intFmt.format(num).toString();
+  }
+  intFmt = new Intl.NumberFormat('de-DE', { style: 'currency', currency: currency });
   return intFmt.format(num).toString();
 }
 
