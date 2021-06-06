@@ -155,7 +155,6 @@ img.et-logo {
   background: var(--color-light);
   border: 1px solid rgba(36, 84, 94, 0.1);
   padding: 0.75rem;
-  margin-bottom: 1.5rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -423,12 +422,98 @@ td.col_name {
 }
 
 /* Login */
+.page-home,
+.page-register {
+  background: var(--color-primary);
+  background-image: radial-gradient(
+    ellipse at center,
+    rgb(33, 250, 174) 0%,
+    #20cc94 100%
+  );
+  min-height: 85vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+
+.page-home .et-logo,
+.page-register .et-logo {
+  max-width: 450px;
+  width: 95%;
+}
+
+.page-home header,
+.page-home footer,
+.page-register header,
+.page-register footer {
+  border: 0;
+  background: none;
+}
+
+.page-home footer,
+.page-register footer {
+  padding-top: 1rem;
+  font-size: 1.1rem;
+}
 .et-login {
-  margin: 2rem auto;
-  max-width: 500px;
-  box-shadow: 0px 0px 10px rgba(36, 84, 94, 0.1);
-  padding: 0.5rem;
-  padding-bottom: 1rem;
+  margin: 1rem auto;
+  max-width: 425px;
+  background: rgba(36, 84, 94, 0.14);
+  box-shadow: 0px 0px 10px rgba(92, 238, 187, 0.4);
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  text-shadow: 0px 0px 5px rgba(92, 238, 187, 0.8);
+  font-size: 1.1rem;
+}
+
+.et-login .form-label {
+  font-family: var(--font-accent);
+  font-size: 1.2rem;
+}
+
+.et-login input {
+  background: rgba(92, 238, 187, 0.5);
+  border: 1px solid rgba(36, 84, 94, 0.4);
+  font-size: 1.1rem;
+  color: var(--color-secondary);
+  transition: all 0.2s;
+}
+
+.et-login input:focus-visible,
+.et-login input:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.et-login input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(92, 238, 187, 0.5);
+  border-color: rgba(36, 84, 94, 0.4);
+}
+
+.et-login input:-webkit-autofill,
+.et-login input:-webkit-autofill:hover,
+.et-login input:-webkit-autofill:focus,
+.et-login input:-webkit-autofill:active {
+  filter: none;
+  box-shadow: 0 0 0 30px rgba(92, 238, 187, 0.6) inset !important;
+  background: rgba(92, 238, 187, 0.6) !important;
+  border-color: rgba(36, 84, 94, 0.4) !important;
+  -webkit-text-fill-color: var(--color-secondary); !important;
+}
+
+.et-login input:-webkit-autofill::first-line {
+  font-size: 1.1rem;
+  color: var(--color-secondary);
+}
+
+.et-login .btn-link {
+  color: var(--color-secondary);
+  transition: all 0.2s;
+}
+
+.et-login .btn-link:hover {
+  transform: scale(1.1);
+  color: #333;
 }
 
 .et-login .card-title {
@@ -449,6 +534,10 @@ td.col_name {
   margin-top: 1rem;
 }
 
+.et-login button .fas {
+  padding-right: 0.25rem;
+}
+
 .et-btn-login,
 .et-btn-register {
   font-family: var(--font-accent);
@@ -456,19 +545,29 @@ td.col_name {
   color: #fff;
   border: 0;
   font-size: 1.1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   margin-left: 1rem;
   border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.et-btn-login:hover,
+.et-btn-register:hover {
+  background: #0f6a7c;
 }
 
 /* Register */
-.et-register h1 {
-  margin-bottom: 0.5rem;
+.page-register .card-title {
+  margin-bottom: 0.75rem;
 }
 .et-register fieldset {
   margin: 0;
   align-items: flex-start;
   flex-direction: column;
+}
+
+.et-register .form-label {
+  margin: 0.5rem 0 0.25rem;
 }
 
 .et-register .et-btns-fieldset {
@@ -569,12 +668,12 @@ td.col_name {
     border-radius: 0.5rem;
   }
 
-  .et-content {
-    padding: 2rem;
+.et-content {
+    padding: 0 2rem 1rem;
   }
 
-  .page-dashboard .et-content {
-    padding: 0 2rem 1rem;
+  .et-page-title {
+    padding-top:2rem;
   }
 
   .et-filters {
@@ -639,6 +738,10 @@ td.col_name {
 }
 
 @media screen and (min-width: 992px) {
+  .container {
+    max-width:900px;
+  }
+
 }
 
 @media screen and (min-width: 1200px) {

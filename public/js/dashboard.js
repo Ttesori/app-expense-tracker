@@ -227,6 +227,7 @@ const showNoExpenses = () => {
 
 const populateAccounts = async () => {
   let accounts = await getAccounts();
+  console.log(accounts);
   accounts.forEach(account => {
     const option = document.createElement('option');
     option.value = account._id;
@@ -296,6 +297,7 @@ const init = async () => {
     populateMonths();
     return;
   }
+  populateAccounts();
   showNoExpenses();
 }
 
