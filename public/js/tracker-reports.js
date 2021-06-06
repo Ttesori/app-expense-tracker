@@ -1,6 +1,7 @@
 const els = {
   reportsEl: document.querySelector('.report-container'),
   reportTitleEl: document.querySelector('.report-title'),
+  reportMonthEl: document.querySelector('.et-report-month'),
   monthSwitcherEl: document.querySelector('#month-switcher'),
 }
 
@@ -20,7 +21,10 @@ const showReport = (expenses, month) => {
   // CLear prev report
   els.reportsEl.innerHTML = '';
   els.monthSwitcherEl.classList.remove('hide');
-  els.monthSwitcherEl.value = month;
+  els.monthSwitcherEl.value = '#';
+
+  // Add report title
+  els.reportMonthEl.textContent = dayjs(month).format('MMMM YYYY');
 
   // get total spent for month
   const total = expenses.reduce((count, expense) => count + expense.amount, 0);
@@ -37,6 +41,14 @@ const showReport = (expenses, month) => {
   h3.classList.add('et-section-header')
   h3.textContent = `Total Expenses: ${total_fmt}`;
   els.reportsEl.appendChild(h3);
+
+  // Add print button
+  els.reportsEl.appendChild(document.createElement('hr'));
+  const button = document.createElement('button');
+  button.innerHTML = `<i class="fas fa-print"></i> Print Report`;
+  button.className = 'btn-add btn-print';
+  button.addEventListener('click', () => window.print())
+  els.reportsEl.appendChild(button);
 }
 
 const buildReportSectionCategory = (expenses, total) => {

@@ -1,0 +1,14 @@
+body {
+  width: 7.5in;
+  height: 10in;
+  font-size: 16pt;
+}
+
+header,
+footer,
+button,
+select,
+.et-filters,
+.col-btn {
+  display: none !important;
+}

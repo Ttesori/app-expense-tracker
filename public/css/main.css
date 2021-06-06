@@ -214,6 +214,23 @@ img.et-logo {
   border-radius: 0.5rem;
   transform: translateY(-3px);
   font-size: 1rem;
+  transition: all .2s;
+}
+
+.btn-print {
+  padding:0.25rem 1rem;
+  display:block;
+  margin:.5rem auto;
+}
+
+
+.btn-print .fas {
+  padding-right:.25rem;
+}
+
+.btn-add:hover, .btn-update-profile:hover, .btn-print:hover {
+  background:var(--color-primary);
+  color:var(--color-secondary);
 }
 
 .col-act,
@@ -389,6 +406,17 @@ td.col_name {
 .et-section-header {
   font-size: 1.4rem;
   margin-bottom: 0.75rem;
+}
+
+.btn-print {
+  margin-top:1rem;
+}
+
+.page-reports hr {
+  border-top:2px solid rgba(36, 84, 94, 0.4);
+  background-color: transparent;
+  height:0px;
+  display:block;
 }
 
 /* Profile Styles */

@@ -44,7 +44,8 @@ const formatMoney = (num) => {
     '€': 'EUR',
     '£': 'GBP'
   }
-  const currency = currencyMap[etUserSettings.currencySymbol];
+  const currKey = (etUserSettings !== undefined) ? etUserSettings.currencySymbol : 1;
+  const currency = currencyMap[currKey];
 
   num = num.toFixed(2);
   let intFmt;

@@ -147,7 +147,6 @@ const handleDeleteExpense = (e) => {
 }
 
 const deleteExpense = async (id) => {
-  console.log('Deleting expense', id);
   let body = {
     id: id
   };
@@ -227,7 +226,6 @@ const showNoExpenses = () => {
 
 const populateAccounts = async () => {
   let accounts = await getAccounts();
-  console.log(accounts);
   accounts.forEach(account => {
     const option = document.createElement('option');
     option.value = account._id;

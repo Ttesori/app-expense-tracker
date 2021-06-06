@@ -38,7 +38,7 @@ module.exports = {
   },
   getReports: async (req, res) => {
     res.render('tracker/reports.ejs', {
-      title: 'Reports',
+      title: 'Report',
       className: 'page-reports',
       user: req.user,
       user_id: req.user._id
