@@ -80,7 +80,7 @@ const createTableBodyRow = (expense) => {
 
 
   const td_date = document.createElement('td');
-  td_date.textContent = dayjs(expense.date).format('M/D/YY');
+  td_date.textContent = dayjs(expense.date).format(dateFormat[etUserSettings.dateFormat]);
   td_date.classList.add('col-date');
   tr.appendChild(td_date);
 
