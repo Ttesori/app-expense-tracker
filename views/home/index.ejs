@@ -20,40 +20,43 @@
 <body class="<%= className %>">
   <div id="content">
     <header class="et-header">
-
-      <h1 class="text-center"><img src="/img/et-logo-dk-stacked.svg" alt="ExpenseTracker Logo" class="et-logo"></h1>
+      <h1 class="et-logo">ExpenseTracker</h1>
     </header>
-    <div class="container">
-      <div class="card et-login">
-        <div class="card-body">
-          <h5 class="card-title">Sign In</h5>
-          <% if (locals.messages.errors) { %>
-            <% messages.errors.forEach( el=> { %>
-              <div class="alert alert-danger">
-                <%= el.msg %>
-              </div>
-              <% }) %>
-                <% } %>
-                  <form method="post" action="/login">
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control">
-                    <fieldset>
-                      <a href="/register" class="btn-link">Create Account</a>
-                      <button class="et-btn-login"><i class="fas fa-sign-in-alt"></i> Sign In</button>
-                    </fieldset>
 
+    <section class="et-home-container">
+      <section class="et-login">
+        <h2>Sign In</h2>
+        <% if (locals.messages.errors) { %>
+          <% messages.errors.forEach( el=> { %>
+            <div class="alert alert-danger">
+              <%= el.msg %>
+            </div>
+            <% }) %>
+              <% } %>
+                <form method="post" action="/login">
+                  <label class="form-label">Email</label>
+                  <input type="email" name="email" class="form-control">
+                  <label class="form-label">Password</label>
+                  <input type="password" name="password" class="form-control">
 
-                  </form>
-        </div>
-      </div>
-    </div>
+                  <a href="/register" class="btn-link">Create Account</a>
+                  <button class="et-btn-login"><i class="fas fa-sign-in-alt"></i> Sign In</button>
 
+                </form>
+      </section>
+      <aside class="et-intro">
+        <h1>Focused Money Management</h1>
+        <p><strong>Our wallets could all use fewer pennies flying out,</strong> right? ExpenseTracker simplifies
+          budgeting by focusing only on expenses.</p>
+      </aside>
+    </section>
 
     <footer class="et-footer">
-      <a href="https://github.com/Ttesori">Expense Tracker <br /> Design &amp; Development</a> by
-      <a href="https://tonitesori.dev">Toni</a>
+      <p class="copy">
+        <a href="https://github.com/Ttesori">Expense Tracker Design &amp; Development</a> by
+        <a href="https://tonitesori.dev">Toni</a>
+      </p>
+      <cite><a href="https://storyset.com/finance">Finance illustration by Storyset</a></cite>
     </footer>
   </div>
 </body>
