@@ -19,6 +19,7 @@
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
   <script>dayjs.extend(window.dayjs_plugin_utc)</script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
   <script type="text/javascript">
     const etUserSettings = {
       dateFormat: <%= user.date_format %>,
@@ -26,6 +27,6 @@
       currencySymbol: '<%= user.currency_symbol %>',
     }
   </script>
-  <script src="/js/utils.js" defer></script>
-  <script src="/js/tracker-reports.js" defer></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/tracker-reports.js"></script>
   <%- include('../partials/_foot.ejs'); %>

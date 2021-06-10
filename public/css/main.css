@@ -201,7 +201,7 @@ img.et-logo {
   margin-bottom: 1.5rem;
   padding-bottom: 0.25rem;
   border-bottom: 2px solid rgba(36, 84, 94, 0.1);
-  margin-top: 2rem;
+  padding-top: 2rem;
 }
 
 .btn-add,
@@ -426,6 +426,21 @@ td.col_name {
   background-color: transparent;
   height: 0px;
   display: block;
+}
+
+.report-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-section {
+  width: 50%;
+}
+
+.report-section canvas {
+  width: 30%;
+  max-width: 250px;
+  max-height: 250px;
 }
 
 /* Profile Styles */

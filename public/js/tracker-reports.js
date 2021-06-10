@@ -29,33 +29,73 @@ const showReport = (expenses, month) => {
   // get total spent for month
   const total = expenses.reduce((count, expense) => count + expense.amount, 0);
 
+  const reportContainer = document.createElement('section');
+
   // build report section: by category
-  buildReportSectionCategory(expenses, total);
+  reportContainer.appendChild(buildReportSectionCategory(expenses, total));
 
   // build report section: by account
-  buildReportSectionAccount(expenses, total);
+  reportContainer.appendChild(buildReportSectionAccount(expenses, total));
+
+  // const chartEl = document.createElement('canvas');
+  // const data = {
+  //   labels: [
+  //     'Red',
+  //     'Blue',
+  //     'Yellow'
+  //   ],
+  //   datasets: [{
+  //     label: 'My First Dataset',
+  //     data: [300, 50, 100],
+  //     backgroundColor: [
+  //       'rgb(255, 99, 132)',
+  //       'rgb(54, 162, 235)',
+  //       'rgb(255, 205, 86)'
+  //     ],
+  //     hoverOffset: 4
+  //   }]
+  // };
+  // const chart = new Chart(chartEl, {
+  //   type: 'doughnut',
+  //   data: data,
+  // });
+  // reportContainer.appendChild(chartEl, data);
 
   // totals
+  reportContainer.appendChild(buildReportSectionTotals(total));
+
+  els.reportsEl.appendChild(reportContainer);
+
+}
+
+const buildReportSectionTotals = (total) => {
+  const totalsSectionEl = document.createElement('section');
   const total_fmt = formatMoney(total);
   const h3 = document.createElement('h3');
   h3.classList.add('et-section-header')
   h3.textContent = `Total Expenses: ${total_fmt}`;
-  els.reportsEl.appendChild(h3);
+  totalsSectionEl.appendChild(h3);
 
   // Add print button
-  els.reportsEl.appendChild(document.createElement('hr'));
+  totalsSectionEl.appendChild(document.createElement('hr'));
   const button = document.createElement('button');
   button.innerHTML = `<i class="fas fa-print"></i> Print Report`;
   button.className = 'btn-add btn-print';
   button.addEventListener('click', () => window.print())
-  els.reportsEl.appendChild(button);
+  totalsSectionEl.appendChild(button);
+
+  return totalsSectionEl;
 }
 
 const buildReportSectionCategory = (expenses, total) => {
+  const section = document.createElement('section');
+  section.className = 'report-section';
+  const tableSection = document.createElement('div');
+  tableSection.className = 'table-section';
   const h3 = document.createElement('h3');
   h3.textContent = 'Expenses By Category';
   h3.classList.add('et-section-header');
-  els.reportsEl.appendChild(h3);
+  tableSection.appendChild(h3);
 
   const table = document.createElement('table');
   table.classList.add('table');
@@ -67,7 +107,46 @@ const buildReportSectionCategory = (expenses, total) => {
     tbody.appendChild(tr);
   })
   table.appendChild(tbody);
-  els.reportsEl.appendChild(table);
+
+  tableSection.appendChild(table);
+  section.appendChild(tableSection);
+
+  createPieChart(section, categoriesMap, total);
+
+  return section;
+}
+
+const createPieChart = (section, map, total) => {
+  console.log(map);
+  let amounts = [];
+  let labels = [];
+  map.forEach(category => {
+    amounts.push(category.amount);
+    labels.push(category.name);
+  });
+  const canvas = document.createElement('canvas');
+  section.appendChild(canvas);
+  canvas.className = 'chart';
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Expenses by Categories',
+      data: amounts,
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)'
+      ],
+      hoverOffset: 4
+    }]
+  };
+  const chart = new Chart(canvas, {
+    type: 'doughnut',
+    data: data,
+    responsive: true
+  });
+
 }
 
 const createReportRow = (data, total) => {
@@ -80,18 +159,18 @@ const createReportRow = (data, total) => {
   td_amt.textContent = formatMoney(data.amount);
   td_amt.classList.add('col_amt');
   tr.appendChild(td_amt);
-  const td_per = document.createElement('td');
-  td_per.classList.add('col_per');
-  const span_per = document.createElement('span');
-  span_per.textContent = formatPercent(data.amount, total);
-  span_per.classList.add('et-report-percentage');
-  td_per.appendChild(span_per);
+  // const td_per = document.createElement('td');
+  // td_per.classList.add('col_per');
+  // const span_per = document.createElement('span');
+  // span_per.textContent = formatPercent(data.amount, total);
+  // span_per.classList.add('et-report-percentage');
+  // td_per.appendChild(span_per);
 
-  const span_bar = document.createElement('span');
-  span_bar.classList.add('et-report-percentage-bar');
-  span_bar.style.width = formatPercent(data.amount, total);
-  td_per.appendChild(span_bar);
-  tr.appendChild(td_per);
+  // const span_bar = document.createElement('span');
+  // span_bar.classList.add('et-report-percentage-bar');
+  // span_bar.style.width = formatPercent(data.amount, total);
+  // td_per.appendChild(span_bar);
+  // tr.appendChild(td_per);
   return tr;
 }
 
@@ -112,10 +191,11 @@ const getCategoriesMap = (expenses) => {
 }
 
 const buildReportSectionAccount = (expenses, total) => {
+  const section = document.createElement('div');
   const h3 = document.createElement('h3');
   h3.textContent = 'Expenses By Account';
   h3.classList.add('et-section-header');
-  els.reportsEl.appendChild(h3);
+  section.appendChild(h3);
 
   const table = document.createElement('table');
   table.classList.add('table');
@@ -127,7 +207,9 @@ const buildReportSectionAccount = (expenses, total) => {
     tbody.appendChild(tr)
   });
   table.appendChild(tbody);
-  els.reportsEl.appendChild(table);
+  section.appendChild(table);
+
+  return section;
 }
 
 const getAccountsMap = (expenses) => {
