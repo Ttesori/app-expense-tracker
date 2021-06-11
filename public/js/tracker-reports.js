@@ -37,47 +37,14 @@ const showReport = (expenses, month) => {
   // build report section: by account
   reportContainer.appendChild(buildReportSectionAccount(expenses, total));
 
-  // const chartEl = document.createElement('canvas');
-  // const data = {
-  //   labels: [
-  //     'Red',
-  //     'Blue',
-  //     'Yellow'
-  //   ],
-  //   datasets: [{
-  //     label: 'My First Dataset',
-  //     data: [300, 50, 100],
-  //     backgroundColor: [
-  //       'rgb(255, 99, 132)',
-  //       'rgb(54, 162, 235)',
-  //       'rgb(255, 205, 86)'
-  //     ],
-  //     hoverOffset: 4
-  //   }]
-  // };
-  // const chart = new Chart(chartEl, {
-  //   type: 'doughnut',
-  //   data: data,
-  // });
-  // reportContainer.appendChild(chartEl, data);
-
-  // totals
   reportContainer.appendChild(buildReportSectionTotals(total));
 
   els.reportsEl.appendChild(reportContainer);
 
 }
 
-const buildReportSectionTotals = (total) => {
+const buildReportSectionTotals = () => {
   const totalsSectionEl = document.createElement('section');
-  const total_fmt = formatMoney(total);
-  const h3 = document.createElement('h3');
-  h3.classList.add('et-section-header')
-  h3.textContent = `Total Expenses: ${total_fmt}`;
-  totalsSectionEl.appendChild(h3);
-
-  // Add print button
-  totalsSectionEl.appendChild(document.createElement('hr'));
   const button = document.createElement('button');
   button.innerHTML = `<i class="fas fa-print"></i> Print Report`;
   button.className = 'btn-add btn-print';
@@ -105,7 +72,10 @@ const buildReportSectionCategory = (expenses, total) => {
   categoriesMap.forEach(category => {
     const tr = createReportRow(category, total)
     tbody.appendChild(tr);
-  })
+  });
+  // Append total row
+  const tr = createTotalRow(total);
+  tbody.appendChild(tr);
   table.appendChild(tbody);
 
   tableSection.appendChild(table);
@@ -114,6 +84,20 @@ const buildReportSectionCategory = (expenses, total) => {
   createPieChart(section, categoriesMap, 'Expenses By Category');
 
   return section;
+}
+
+const createTotalRow = (total) => {
+  const tr = document.createElement('tr');
+  tr.className = 'row-total';
+  const th = document.createElement('th');
+  th.textContent = 'Total';
+  const td = document.createElement('td');
+  td.textContent = formatMoney(total);
+
+  tr.appendChild(th);
+  tr.appendChild(td);
+
+  return tr;
 }
 
 const createPieChart = (section, map, title) => {
@@ -136,9 +120,13 @@ const createPieChart = (section, map, title) => {
       backgroundColor: [
         'rgb(36, 84, 94) ',
         'rgb(32, 204, 148)',
-        'rgb(33, 250, 174)'
+        'rgb(33, 250, 174)',
+        'rgb(200, 200, 200)',
+        'rgb(220, 220, 220)',
+        'rgb(245, 245, 245)',
       ],
-      hoverOffset: 4
+      hoverOffset: 4,
+      borderWidth: 3
     }]
   };
   const chart = new Chart(canvas, {
@@ -159,18 +147,6 @@ const createReportRow = (data, total) => {
   td_amt.textContent = formatMoney(data.amount);
   td_amt.classList.add('col_amt');
   tr.appendChild(td_amt);
-  // const td_per = document.createElement('td');
-  // td_per.classList.add('col_per');
-  // const span_per = document.createElement('span');
-  // span_per.textContent = formatPercent(data.amount, total);
-  // span_per.classList.add('et-report-percentage');
-  // td_per.appendChild(span_per);
-
-  // const span_bar = document.createElement('span');
-  // span_bar.classList.add('et-report-percentage-bar');
-  // span_bar.style.width = formatPercent(data.amount, total);
-  // td_per.appendChild(span_bar);
-  // tr.appendChild(td_per);
   return tr;
 }
 
@@ -209,6 +185,9 @@ const buildReportSectionAccount = (expenses, total) => {
     const tr = createReportRow(account, total);
     tbody.appendChild(tr)
   });
+  const tr = createTotalRow(total);
+  tbody.appendChild(tr);
+
   table.appendChild(tbody);
   tableSection.appendChild(table);
   section.appendChild(tableSection);
