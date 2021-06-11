@@ -111,12 +111,12 @@ const buildReportSectionCategory = (expenses, total) => {
   tableSection.appendChild(table);
   section.appendChild(tableSection);
 
-  createPieChart(section, categoriesMap, total);
+  createPieChart(section, categoriesMap, 'Expenses By Category');
 
   return section;
 }
 
-const createPieChart = (section, map, total) => {
+const createPieChart = (section, map, title) => {
   console.log(map);
   let amounts = [];
   let labels = [];
@@ -131,12 +131,12 @@ const createPieChart = (section, map, total) => {
   const data = {
     labels: labels,
     datasets: [{
-      label: 'Expenses by Categories',
+      label: title,
       data: amounts,
       backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)'
+        'rgb(36, 84, 94) ',
+        'rgb(32, 204, 148)',
+        'rgb(33, 250, 174)'
       ],
       hoverOffset: 4
     }]
@@ -192,10 +192,13 @@ const getCategoriesMap = (expenses) => {
 
 const buildReportSectionAccount = (expenses, total) => {
   const section = document.createElement('div');
+  section.className = 'report-section';
+  const tableSection = document.createElement('div');
+  tableSection.className = 'table-section';
   const h3 = document.createElement('h3');
   h3.textContent = 'Expenses By Account';
   h3.classList.add('et-section-header');
-  section.appendChild(h3);
+  tableSection.appendChild(h3);
 
   const table = document.createElement('table');
   table.classList.add('table');
@@ -207,7 +210,10 @@ const buildReportSectionAccount = (expenses, total) => {
     tbody.appendChild(tr)
   });
   table.appendChild(tbody);
-  section.appendChild(table);
+  tableSection.appendChild(table);
+  section.appendChild(tableSection);
+
+  createPieChart(section, accountsMap, 'Expenses By Category');
 
   return section;
 }

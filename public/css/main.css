@@ -6,8 +6,8 @@
 }
 
 :root {
-  --color-secondary: #24545e;
-  --color-primary: #20cc94;
+  --color-secondary: rgb(36, 84, 94);
+  --color-primary: rgb(32, 204, 148);
   --color-light: #f8f9fa;
   --font-accent: 'Roboto Slab', serif;
   --font-primary: 'Open Sans', sans-serif;
