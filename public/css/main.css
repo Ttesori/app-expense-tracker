@@ -877,6 +877,11 @@ td.col_name {
     margin-top: 0.5em;
     margin-bottom: 0.15em;
   }
+
+  .et-footer.home cite a {
+    display: inline;
+    font-size: 0.95rem;
+  }
 }
 
 @media screen and (min-width: 1200px) {
