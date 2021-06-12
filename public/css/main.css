@@ -850,6 +850,10 @@ td.col_name {
     max-height: 300px;
   }
 
+  .et-intro p {
+    margin-bottom: 0;
+  }
+
   .et-btn-login {
     font-size: 1.1rem;
   }
