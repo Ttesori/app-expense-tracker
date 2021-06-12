@@ -6,7 +6,7 @@
 }
 
 :root {
-  --color-secondary: rgb(36, 84, 94);
+  --color-secondary: #24545e;
   --color-primary: #20cc94;
   --color-light: #f8f9fa;
   --font-accent: 'Roboto Slab', serif;
