@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto+Slab:wght@500&display=swap');
 
 .hide {
   position: absolute;
@@ -29,6 +29,7 @@ html {
 
 a {
   color: var(--color-primary);
+  transition: all 0.2s;
 }
 
 h1,
@@ -492,127 +493,127 @@ td.col_name {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 0 1rem;
+  padding: 0 1em;
+}
+.et-header.home .et-logo {
+  padding-bottom: 0.25em;
+}
+.et-header.home .et-logo img {
+  max-width: 95%;
 }
 
-.page-home .et-logo,
-.page-register .et-logo {
-  max-width: 450px;
-  width: 95%;
-}
-
-.page-home header,
-.page-home footer,
-.page-register header,
-.page-register footer {
-  border: 0;
+.et-header.home {
   background: none;
-}
-
-.page-home footer,
-.page-register footer {
-  padding-top: 1rem;
-  font-size: 1.1rem;
+  color: #fff;
+  padding: 0;
 }
 
 .et-home-container {
   display: flex;
+  width: 90%;
+  max-width: 400px;
+  margin: 0.5em auto;
   flex-direction: column;
-  place-content: center;
+  border-radius: 1rem;
+  border: 5px solid rgba(255, 255, 255, 0.1);
 }
 
-.page-home .et-header {
+.et-login {
+  background-image: radial-gradient(
+    ellipse at center,
+    #26efa7 0%,
+    #20cc94 100%
+  );
+  padding: 2.5em 3em;
+  border-radius: 0.5rem;
+}
+
+.et-form-login {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.et-form-login .form-label {
+  font-family: var(--font-accent);
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.et-login-title {
+  font-size: 2.1rem;
+  text-align: center;
   margin: 0;
   padding: 0;
 }
 
-.page-home .et-logo {
-  background: url('/img/et-logo-reverse-stacked.svg') no-repeat top center;
-  background-size: contain;
-  text-indent: -999em;
-  width: 100%;
-  height: 130px;
-}
-
-.et-intro {
-  display: none;
-}
-.et-login {
-  margin: 1rem auto;
-  max-width: 425px;
-  background-image: radial-gradient(
-    ellipse at center,
-    rgb(33, 250, 174) 0%,
-    #20cc94 100%
-  );
-  padding: 1rem 1.5rem;
-  border-radius: 1rem;
-  text-shadow: 0px 0px 5px rgba(92, 238, 187, 0.8);
-  font-size: 1.1rem;
-}
-
-.et-login .form-label {
-  font-family: var(--font-accent);
-  font-size: 1.2rem;
-}
-
-.et-login input {
-  background: rgba(92, 238, 187, 0.5);
-  border: 1px solid rgba(36, 84, 94, 0.4);
-  font-size: 1.1rem;
+.et-home-container .form-control {
   color: var(--color-secondary);
-  transition: all 0.2s;
+  border: 1px solid rgba(36, 84, 94, 0.2);
+  padding: 0.6em 1em;
 }
 
-.et-login input:focus-visible,
-.et-login input:hover {
-  background: rgba(255, 255, 255, 0.7);
+.form-btns {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  align-items: center;
 }
 
-.et-login input:focus {
-  box-shadow: 0 0 0 0.25rem rgba(92, 238, 187, 0.5);
-  border-color: rgba(36, 84, 94, 0.4);
+.form-btns .btn-link {
+  color: var(--color-secondary);
+  margin-right: 1.5em;
 }
 
-.et-login button .fas {
-  padding-right: 0.25rem;
-}
-
-.et-btn-login,
-.et-btn-register {
-  font-family: var(--font-accent);
+.et-btn-login {
   background: var(--color-secondary);
   color: #fff;
   border: 0;
-  font-size: 1.1rem;
-  width: 100%;
-  border-radius: 0.5rem;
+  padding: 0.4em 1.4rem;
+  border-radius: 0.5em;
+  font-size: 1.3rem;
+  font-family: var(--font-accent);
   transition: all 0.2s;
 }
 
 .et-btn-login:hover,
-.et-btn-register:hover {
-  background: rgb(15, 106, 124);
+.et-btn-login:focus {
+  background-color: teal;
 }
 
-/* Register */
-.page-register .card-title {
-  margin-bottom: 0.75rem;
-}
-.et-register fieldset {
-  margin: 0;
-  align-items: flex-start;
-  flex-direction: column;
+.et-btn-login .fas {
+  padding-right: 0.25em;
 }
 
-.et-register .form-label {
-  margin: 0.5rem 0 0.25rem;
+.et-intro {
+  background: #fff;
+  padding: 2em;
+  text-align: center;
+  display: none;
+}
+/* Home Footer */
+.et-footer.home {
+  background: none;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.7;
+  padding: 0.5rem;
+  font-size: 1.1rem;
 }
 
-.et-register .et-btns-fieldset {
-  flex-direction: row;
-  align-items: center;
-  margin-top: 1rem;
+.et-footer.home a {
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.et-footer.home a:hover,
+.et-footer.home a:focus {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.et-footer.home cite a {
+  color: rgba(255, 255, 255, 0.3);
+  font-family: var(--font-primary);
+  display: none;
 }
 
 .alert {

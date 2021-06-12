@@ -19,13 +19,13 @@
 
 <body class="<%= className %>">
   <div id="content">
-    <header class="et-header">
-      <h1 class="et-logo">ExpenseTracker</h1>
+    <header class="et-header home">
+      <h1 class="et-logo"><img src="/img/et-logo-reverse.svg" alt="ExpenseTracker logo"></h1>
     </header>
 
-    <section class="et-home-container">
+    <main class="et-home-container">
       <section class="et-login">
-        <h2>Sign In</h2>
+        <h2 class="et-login-title">Sign In</h2>
         <% if (locals.messages.errors) { %>
           <% messages.errors.forEach( el=> { %>
             <div class="alert alert-danger">
@@ -33,30 +33,32 @@
             </div>
             <% }) %>
               <% } %>
-                <form method="post" action="/login">
+                <form method="post" action="/login" class="et-form-login">
                   <label class="form-label">Email</label>
                   <input type="email" name="email" class="form-control">
                   <label class="form-label">Password</label>
                   <input type="password" name="password" class="form-control">
-
-                  <a href="/register" class="btn-link">Create Account</a>
-                  <button class="et-btn-login"><i class="fas fa-sign-in-alt"></i> Sign In</button>
-
+                  <fieldset class="form-btns">
+                    <a href="/register" class="btn-link">Create Account</a>
+                    <button class="et-btn-login"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+                  </fieldset>
                 </form>
       </section>
       <aside class="et-intro">
+        <img src="/img/et-illustration.svg" alt="Illustration of woman and a wallet with bills and pennies flying out">
         <h1>Focused Money Management</h1>
         <p><strong>Our wallets could all use fewer pennies flying out,</strong> right? ExpenseTracker simplifies
           budgeting by focusing only on expenses.</p>
       </aside>
-    </section>
+    </main>
 
-    <footer class="et-footer">
+    <footer class="et-footer home">
       <p class="copy">
-        <a href="https://github.com/Ttesori">Expense Tracker Design &amp; Development</a> by
+        <a href="https://github.com/Ttesori">Expense Tracker Development</a> by
         <a href="https://tonitesori.dev">Toni</a>
+        <br />
+        <cite><a href="https://storyset.com/finance">Finance illustration by Storyset</a></cite>
       </p>
-      <cite><a href="https://storyset.com/finance">Finance illustration by Storyset</a></cite>
     </footer>
   </div>
 </body>
