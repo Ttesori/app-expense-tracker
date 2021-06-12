@@ -7,7 +7,7 @@
 
 :root {
   --color-secondary: rgb(36, 84, 94);
-  --color-primary: rgb(32, 204, 148);
+  --color-primary: #20cc94;
   --color-light: #f8f9fa;
   --font-accent: 'Roboto Slab', serif;
   --font-primary: 'Open Sans', sans-serif;
@@ -488,7 +488,7 @@ td.col_name {
 /* Login */
 .page-home,
 .page-register {
-  background: var(--color-secondary);
+  background-image: radial-gradient(ellipse at center, #166374 0%, #24545e 80%);
   min-height: 85vh;
   display: flex;
   justify-content: center;
@@ -500,12 +500,14 @@ td.col_name {
 }
 .et-header.home .et-logo img {
   max-width: 95%;
+  filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.2));
 }
 
 .et-header.home {
   background: none;
   color: #fff;
   padding: 0;
+  border: 0;
 }
 
 .et-home-container {
@@ -514,8 +516,17 @@ td.col_name {
   max-width: 400px;
   margin: 0.5em auto;
   flex-direction: column;
+  border: 6px solid rgba(255, 255, 255, 0.13);
   border-radius: 1rem;
-  border: 5px solid rgba(255, 255, 255, 0.1);
+}
+
+.page-register .et-home-container {
+  max-width: 500px;
+}
+
+.et-intro {
+  position: absolute;
+  left: -9999px;
 }
 
 .et-login {
@@ -526,6 +537,7 @@ td.col_name {
   );
   padding: 2.5em 3em;
   border-radius: 0.5rem;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.15);
 }
 
 .et-form-login {
@@ -584,12 +596,6 @@ td.col_name {
   padding-right: 0.25em;
 }
 
-.et-intro {
-  background: #fff;
-  padding: 2em;
-  text-align: center;
-  display: none;
-}
 /* Home Footer */
 .et-footer.home {
   background: none;
@@ -597,6 +603,7 @@ td.col_name {
   line-height: 1.7;
   padding: 0.5rem;
   font-size: 1.1rem;
+  border: 0;
 }
 
 .et-footer.home a {
@@ -633,9 +640,6 @@ td.col_name {
 }
 
 @media screen and (min-width: 576px) {
-  :root {
-  }
-
   .et-main {
     width: 93%;
     margin: 1rem auto;
@@ -688,6 +692,11 @@ td.col_name {
 
   .et-main {
     max-width: 750px;
+  }
+
+  .page-home,
+  .page-register {
+    min-height: 100vh;
   }
 }
 
@@ -792,6 +801,81 @@ td.col_name {
 @media screen and (min-width: 992px) {
   .container {
     max-width: 900px;
+  }
+  /* Login/Register */
+  .page-home,
+  .page-register {
+    min-height: 100vh;
+  }
+  .et-home-container,
+  .page-register .et-home-container {
+    flex-direction: row;
+    max-width: 950px;
+  }
+
+  .et-header.home {
+    margin-bottom: 1em;
+  }
+  .et-header.home .et-logo img {
+    width: 500px;
+  }
+  .et-login {
+    width: 45%;
+    border-radius: 0;
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+    padding: 2em 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .et-form-login {
+    width: 85%;
+  }
+  .et-intro {
+    position: static;
+    background: #fff;
+    padding: 2em 1.5em;
+    text-align: center;
+    display: block;
+    width: 55%;
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .et-intro img {
+    margin-bottom: 1em;
+    max-height: 300px;
+  }
+
+  .et-btn-login {
+    font-size: 1.1rem;
+  }
+
+  .page-register .et-intro {
+    order: 1;
+    border-radius: 0;
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+  }
+
+  .page-register .et-login {
+    order: 2;
+    border-radius: 0;
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+  }
+
+  .page-register .et-login-title {
+    margin-bottom: 0.5em;
+  }
+
+  .page-register .form-label {
+    font-size: 1.1rem;
+    margin-top: 0.5em;
+    margin-bottom: 0.15em;
   }
 }
 

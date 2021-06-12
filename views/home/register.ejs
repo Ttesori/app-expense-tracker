@@ -19,24 +19,21 @@
 
 <body class="<%= className %>">
   <div id="content">
-    <header class="et-header">
-
-      <h1 class="text-center"><img src="/img/et-logo-dk-stacked.svg" alt="ExpenseTracker Logo" class="et-logo"></h1>
+    <header class="et-header home">
+      <h1 class="et-logo"><img src="/img/et-logo-reverse.svg" alt="ExpenseTracker logo"></h1>
     </header>
 
-
-
-    <% if (locals.messages.errors) { %>
-      <% messages.errors.forEach( el=> { %>
-        <div class="alert alert-danger">
-          <%= el.msg %>
-        </div>
-        <% }) %>
-          <% } %>
-            <div class="card et-login et-register">
-              <div class="card-body">
-                <h1 class="card-title">Create an Account</h1>
-                <form method="post" action="/register">
+    <main class="et-home-container">
+      <section class="et-login">
+        <h2 class="et-login-title">Create an Account</h2>
+        <% if (locals.messages.errors) { %>
+          <% messages.errors.forEach( el=> { %>
+            <div class="alert alert-danger">
+              <%= el.msg %>
+            </div>
+            <% }) %>
+              <% } %>
+                <form method="post" action="/register" class="et-form-login">
                   <fieldset>
                     <label class="form-label">Email</label>
                     <input type="text" name="email" class="form-control">
@@ -49,22 +46,31 @@
                     <label class="form-label">Confirm Password</label>
                     <input type="password" name="confirmPassword" class="form-control">
                   </fieldset>
-                  <fieldset class="et-btns-fieldset">
+                  <fieldset class="form-btns">
                     <a href="/" class="btn-link">Sign In</a>
-                    <button class="et-btn-register"><i class="fas fa-user-plus"></i> Create Account</button>
+                    <button class="et-btn-login"><i class="fas fa-user-plus"></i> Create Account</button>
                   </fieldset>
 
 
                 </form>
-              </div>
-            </div>
 
+      </section>
+      <aside class="et-intro">
+        <img src="/img/et-illustration-2.svg" alt="Illustration of woman watching a money tree grow">
+        <h1>Watch Your Pennies Grow</h1>
+        <p><strong>Tracking your expenses</strong> helps you focus on the aspect of your finances that's easier to
+          control - your spending.</p>
+      </aside>
+    </main>
 
-
-            <footer class="et-footer">
-              <a href="https://github.com/Ttesori">Expense Tracker <br /> Design &amp; Development</a> by
-              <a href="https://tonitesori.dev">Toni</a>
-            </footer>
+    <footer class="et-footer home">
+      <p class="copy">
+        <a href="https://github.com/Ttesori">Expense Tracker Development</a> by
+        <a href="https://tonitesori.dev">Toni</a>
+        <br />
+        <cite><a href="https://storyset.com/finance">Finance illustration by Storyset</a></cite>
+      </p>
+    </footer>
   </div>
 </body>
 
