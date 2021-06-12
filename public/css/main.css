@@ -551,6 +551,10 @@ td.col_name {
   margin-top: 1rem;
 }
 
+.et-form-login .form-control::placeholder {
+  color: rgba(36, 84, 94, 0.5);
+}
+
 .et-login-title {
   font-size: 2.1rem;
   text-align: center;
