@@ -29,7 +29,8 @@ html {
 
 a {
   color: var(--color-primary);
-  transition: all 0.2s;
+  transition-duration: 0.2s;
+  transition-property: color, background-color;
 }
 
 h1,
@@ -353,6 +354,12 @@ img.et-logo {
   color: var(--color-secondary);
   text-decoration: none;
   border-bottom: 1px solid rgba(36, 84, 94, 0.2);
+}
+
+.et-footer a:hover,
+.et-footer a:focus {
+  color: #222;
+  border-bottom-color: rgba(36, 84, 94, 0.5);
 }
 
 /* Accounts-Page Specific */
@@ -816,6 +823,11 @@ td.col_name {
     border-radius: 0.5rem;
   }
 
+  .btn-add,
+  .btn-update-profile {
+    font-size: 1rem;
+  }
+
   .et-content {
     padding: 0 2rem 1rem;
   }
@@ -910,6 +922,7 @@ td.col_name {
   .container {
     max-width: 900px;
   }
+
   /* Login/Register */
   .page-home,
   .page-register {
