@@ -41,7 +41,7 @@ module.exports = {
         // create account
         let resp = await Account.create(account);
         console.log(resp);
-        res.redirect('/tracker/accounts');
+        res.redirect('/tracker/accounts?add=1');
       }
       req.flash('errors', { msg: 'Account already exists' });
       res.redirect('/tracker/accounts');

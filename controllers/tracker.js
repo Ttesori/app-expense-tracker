@@ -60,7 +60,7 @@ module.exports = {
     }
     let resp = await User.findByIdAndUpdate({ _id: req.user._id }, user);
     if (resp._id) {
-      res.redirect('/tracker/profile');
+      res.redirect('/tracker/profile?update=1');
     }
   },
   getReports: (req, res) => {

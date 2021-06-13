@@ -50,4 +50,14 @@
   </main>
 
   <script src="/js/utils.js"></script>
+  <script>
+    const parseQuery = () => {
+      if (window.location.search.length === 0) return;
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('update')) {
+        showAlert('success', 'Profile updated successfully!', document.querySelector('.profile-container'));
+      }
+    }
+    parseQuery();
+  </script>
   <%- include('../partials/_foot.ejs'); %>

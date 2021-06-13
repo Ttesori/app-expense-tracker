@@ -108,12 +108,20 @@ const handleToggler = (e) => {
   menuToggler.innerHTML = '<i class="fa fa-bars"></i>';
   menuToggler.classList.remove('open');
   menuEl.classList.add('hide');
-  // Change hamburger to close
+}
 
 
-  // remove hide_menu class
-
-  //
+const showAlert = (type, text, el) => {
+  const alert = document.createElement('div');
+  alert.className = `alert alert-${type}`;
+  alert.textContent = text;
+  el.prepend(alert);
+  setTimeout(() => {
+    alert.style.opacity = 0;
+    setTimeout(() => {
+      alert.remove();
+    }, 300)
+  }, 2500);
 }
 
 const menuToggler = document.querySelector('.et-menu-toggle');

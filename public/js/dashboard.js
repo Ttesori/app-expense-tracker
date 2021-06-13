@@ -47,6 +47,7 @@ const showExpenses = (expenses) => {
   els.expensesEl.appendChild(table);
   addEditEventListeners();
   addDeleteEventListeners();
+  parseQuery();
 }
 
 const createTableHeaderRow = () => {
@@ -77,7 +78,6 @@ const createTableHeaderRow = () => {
 
 const createTableBodyRow = (expense) => {
   const tr = document.createElement('tr');
-
 
   const td_date = document.createElement('td');
   td_date.textContent = dayjs(expense.date).format(dateFormat[etUserSettings.dateFormat]);
@@ -147,20 +147,16 @@ const handleDeleteExpense = (e) => {
 }
 
 const deleteExpense = async (id) => {
+
   let body = {
     id: id
   };
-  let resp = await fetchRequest('/expenses', {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  });
-  if (resp === 200) {
-    expenses = await getExpenses();
-    if (expenses.length > 0) return showExpenses(expenses);
+  let resp = await fetchRequest('/expenses', 'DELETE', body);
+  console.log(resp);
+  if (resp.status === 200) {
+    return window.location = '/tracker?delete=1';
   }
+  showAlert('danger', 'Something went wrong.');
 }
 
 const fillInEditForm = (expense) => {
@@ -284,6 +280,22 @@ const handleSearch = (e) => {
 const addEventListeners = () => {
   els.selMonthPicker.addEventListener('change', handleMonthChange);
   els.searchEl.addEventListener('input', handleSearch);
+}
+
+
+const parseQuery = () => {
+  if (window.location.search.length === 0) return;
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get('add')) {
+    if (params.get('add') == 1) {
+      showAlert('success', 'Expense added successfully!', els.expensesEl);
+    }
+  } else if (params.get('update')) {
+    showAlert('success', 'Expense updated successfully!', els.expensesEl);
+  } else if (params.get('delete')) {
+    showAlert('success', 'Expense removed successfully!', els.expensesEl);
+  }
 }
 
 const init = async () => {

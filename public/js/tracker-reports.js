@@ -29,17 +29,13 @@ const showReport = (expenses, month) => {
   // get total spent for month
   const total = expenses.reduce((count, expense) => count + expense.amount, 0);
 
-  const reportContainer = document.createElement('section');
-
   // build report section: by category
-  reportContainer.appendChild(buildReportSectionCategory(expenses, total));
+  els.reportsEl.appendChild(buildReportSectionCategory(expenses, total));
 
   // build report section: by account
-  reportContainer.appendChild(buildReportSectionAccount(expenses, total));
+  els.reportsEl.appendChild(buildReportSectionAccount(expenses, total));
 
-  reportContainer.appendChild(buildReportSectionTotals(total));
-
-  els.reportsEl.appendChild(reportContainer);
+  els.reportsEl.appendChild(buildReportSectionTotals(total));
 
 }
 
@@ -81,7 +77,7 @@ const buildReportSectionCategory = (expenses, total) => {
   tableSection.appendChild(table);
   section.appendChild(tableSection);
 
-  createPieChart(section, categoriesMap, 'Expenses By Category');
+  createPieChart(section, categoriesMap, 'Expense Categories');
 
   return section;
 }
@@ -101,9 +97,9 @@ const createTotalRow = (total) => {
 }
 
 const createPieChart = (section, map, title) => {
-  console.log(map);
   let amounts = [];
   let labels = [];
+  map.length = 5;
   map.forEach(category => {
     amounts.push(category.amount);
     labels.push(category.name);
@@ -118,20 +114,33 @@ const createPieChart = (section, map, title) => {
       label: title,
       data: amounts,
       backgroundColor: [
-        'rgb(36, 84, 94) ',
+        'rgb(36, 84, 94)',
         'rgb(32, 204, 148)',
         'rgb(33, 250, 174)',
         'rgb(200, 200, 200)',
-        'rgb(220, 220, 220)',
-        'rgb(245, 245, 245)',
+        'rgb(230, 230, 230)',
       ],
       hoverOffset: 4,
       borderWidth: 3
     }]
   };
+  const options = {
+    plugins: {
+      title: {
+        display: true,
+        text: `Top 5 ${title}`,
+        font: {
+          size: 16,
+          family: 'Roboto Slab'
+        },
+        color: 'rgb(36, 84, 94)'
+      }
+    }
+  };
   const chart = new Chart(canvas, {
     type: 'doughnut',
     data: data,
+    options: options,
     responsive: true
   });
 
@@ -192,7 +201,7 @@ const buildReportSectionAccount = (expenses, total) => {
   tableSection.appendChild(table);
   section.appendChild(tableSection);
 
-  createPieChart(section, accountsMap, 'Expenses By Category');
+  createPieChart(section, accountsMap, 'Expense Accounts');
 
   return section;
 }

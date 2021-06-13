@@ -34,15 +34,18 @@ module.exports = {
     try {
       let expense = {
         desc: req.body.expense_description,
-        date: dayjs(req.body.expense_date).toISOString(),
+        date: dayjs(req.body.expense_date).utc().toISOString(),
         amount: Number(req.body.expense_amount),
         category: req.body.expense_category,
         account_id: req.body.expense_account,
         user_id: req.user._id || req.body._id
       };
+      console.log(expense.date);
       let resp = await Expense.create(expense);
+
       if (resp._id) {
-        res.redirect('/tracker');
+        req.method = 'GET';
+        res.redirect('/tracker?add=1');
       }
     } catch (err) {
       console.log(err)
@@ -60,7 +63,8 @@ module.exports = {
           category: req.body.expense_category,
         });
       if (resp._id) {
-        res.redirect('/tracker');
+        req.method = 'GET';
+        res.redirect('/tracker?update=1');
       }
 
     }
@@ -72,6 +76,7 @@ module.exports = {
   deleteExpense: async (req, res) => {
     try {
       let result = await Expense.deleteOne({ _id: req.body.id });
+      console.log(result);
       if (result.deletedCount > 0) {
         res.status(200).send();
       }

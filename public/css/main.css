@@ -205,17 +205,28 @@ img.et-logo {
   padding-top: 2rem;
 }
 
+.is-loading {
+  margin: 0 auto;
+  text-align: center;
+  font-family: var(--font-accent);
+  font-size: 1.1rem;
+  padding: 3em;
+  max-width: 300px;
+  border-radius: 1rem;
+  border: 3px dashed rgba(36, 84, 94, 0.2);
+}
+
 .btn-add,
 .btn-update-profile {
   color: var(--color-primary);
   border: 1px solid var(--color-primary);
-  padding: 0.25rem 0.5rem;
-  margin-left: 0.25rem;
+  padding: 0.35em 0.5em;
+  margin-left: 0.35em;
   font-family: var(--font-accent);
   background: #fff;
   border-radius: 0.5rem;
   transform: translateY(-3px);
-  font-size: 1rem;
+  font-size: 1.1rem;
   transition: all 0.2s;
 }
 
@@ -284,9 +295,9 @@ img.et-logo {
 .btn-account-del {
   color: rgba(36, 84, 94, 0.25);
   cursor: pointer;
-  padding: 0.2rem 0.1rem;
+  padding: 0.2em 0.1em;
   transition: all 0.2s;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 .btn-expense-edit:hover,
@@ -299,8 +310,23 @@ img.et-logo {
   color: #f06292;
 }
 
+.modal-dialog {
+  font-size: 1.1rem;
+}
+
+.modal-dialog .form-control,
+.modal-dialog .form-select {
+  padding: 0.5em 1em;
+  font-size: 1.1rem;
+}
+
+.modal-dialog .btn-primary {
+  font-size: 1.2rem;
+}
+
 .modal-title {
   font-family: var(--font-accent);
+  font-size: 1.4rem;
 }
 
 .modal-body {
@@ -311,6 +337,7 @@ img.et-logo {
   margin: 0.5rem 0rem 0.25rem;
   padding: 0;
   font-family: var(--font-accent);
+  font-size: 1.2rem;
 }
 
 .et-footer {
@@ -340,6 +367,11 @@ img.et-logo {
   border-bottom: 1px solid rgba(36, 84, 94, 0.15);
   display: flex;
   justify-content: space-between;
+}
+
+.et-accounts-item .badge {
+  transform: translateY(-1px);
+  margin-left: 0.35em;
 }
 
 /* Reports Page */
@@ -429,6 +461,7 @@ td.col_name {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 2em;
 }
 
 .table-section {
@@ -450,8 +483,8 @@ td.col_name {
 
 .report-section canvas {
   width: 35%;
-  max-width: 400px;
-  max-height: 250px;
+  max-width: 350px;
+  max-height: 275px;
   margin-bottom: 1rem;
 }
 
@@ -496,10 +529,14 @@ td.col_name {
   padding: 0 1em;
 }
 .et-header.home .et-logo {
-  padding-bottom: 0.25em;
-}
-.et-header.home .et-logo img {
-  max-width: 95%;
+  margin: 1em auto 0.5em;
+  padding: 0;
+  text-indent: -9999px;
+  width: 95%;
+  max-width: 500px;
+  background: url('../img/et-logo-reverse-stacked.svg') no-repeat bottom center;
+  background-size: contain;
+  height: 15vh;
   filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.2));
 }
 
@@ -535,9 +572,10 @@ td.col_name {
     #26efa7 0%,
     #20cc94 100%
   );
-  padding: 2.5em 3em;
+  padding: 2em;
   border-radius: 0.5rem;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.15);
+  text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.3);
 }
 
 .et-form-login {
@@ -593,23 +631,20 @@ td.col_name {
   opacity: 0;
 }
 
-.is-invalid ~ .invalid-feedback {
-  opacity: 1;
-  transform: translateX(0em);
-}
-
 .form-btns {
   display: flex;
   justify-content: flex-end;
-  margin-top: 1rem;
+  flex-direction: column;
+  margin-top: 1em;
   align-items: center;
 }
 
 .form-btns .btn-link {
   color: var(--color-secondary);
-  margin-right: 1.5em;
+  margin-top: 0.5em;
   border-radius: 0.5rem;
   padding: 0.25em;
+  order: 2;
 }
 
 .form-btns .btn-link:hover,
@@ -634,6 +669,7 @@ td.col_name {
   font-size: 1.3rem;
   font-family: var(--font-accent);
   transition: all 0.2s;
+  width: 100%;
 }
 
 .et-btn-login:hover,
@@ -680,6 +716,7 @@ td.col_name {
 
 .alert {
   margin-top: 1rem;
+  transition: opacity 0.3s;
 }
 
 @media screen and (min-width: 400px) {
@@ -752,6 +789,13 @@ td.col_name {
   .page-home,
   .page-register {
     min-height: 100vh;
+  }
+
+  .is-invalid ~ .invalid-feedback {
+    opacity: 1;
+    transform: translateX(0em);
+    bottom: 0.95em;
+    max-width: 225px;
   }
 }
 
@@ -834,6 +878,10 @@ td.col_name {
     width: 50%;
   }
 
+  .report-section .chart {
+    max-width: 45%;
+  }
+
   .report-section {
     flex-direction: row;
     justify-content: space-between;
@@ -852,9 +900,9 @@ td.col_name {
     margin: 0 auto;
   }
 
-  .invalid-feedback {
-    bottom: 0.95em;
-    max-width: 225px;
+  .et-header.home .et-logo {
+    background-image: url('../img/et-logo-reverse.svg');
+    height: 8vh;
   }
 }
 
@@ -876,9 +924,7 @@ td.col_name {
   .et-header.home {
     margin-bottom: 1em;
   }
-  .et-header.home .et-logo img {
-    width: 500px;
-  }
+
   .et-login {
     width: 45%;
     border-radius: 0;
@@ -914,8 +960,19 @@ td.col_name {
     margin-bottom: 0;
   }
 
+  .form-btns {
+    flex-direction: row;
+  }
+
+  .form-btns .btn-link {
+    order: 0;
+    margin-top: 0;
+    margin-right: 1em;
+  }
+
   .et-btn-login {
     font-size: 1.1rem;
+    width: auto;
   }
 
   .page-register .et-intro {
@@ -942,9 +999,10 @@ td.col_name {
     margin-bottom: 0.15em;
   }
 
-  .invalid-feedback {
-    width: 150px;
-    bottom: 0.5em;
+  .is-invalid ~ .invalid-feedback {
+    width: 200px;
+    bottom: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .et-footer.home cite a {

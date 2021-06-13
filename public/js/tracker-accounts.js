@@ -25,10 +25,10 @@ const showAccounts = (accounts) => {
     li.setAttribute('data-id', account._id);
     li.innerHTML = `
     <span class="act-desc">${account.desc}
-    <span class="act-count" title="Number of expenses">(${account.count})</span>
+    <span class="act-count badge bg-${account.count > 0 ? 'primary' : 'secondary'}" title="Number of expenses">${account.count} ${account.count === 1 ? 'expense' : 'expenses'}</span>
     </span>
-    <span class="act-btns">
-    <a class="btn-account-edit" title="Edit Account">
+    <span class="act-btns" data-id="${account._id}">
+    <a class="btn-account-edit" title="Edit Account" >
     <i class="fa fa-edit"></i></a>
     ${account.count === 0 ? `
     <a class="btn-account-del" title="Delete Account">
@@ -54,7 +54,7 @@ const addDeleteEventListeners = () => {
 }
 
 const handleEdit = (e) => {
-  const btnId = e.path[3].dataset.id;
+  const btnId = e.target.parentNode.parentNode.dataset.id;
 
   // Get expense from array with that ID
   const account = accounts.find(account => account._id === btnId);
@@ -63,12 +63,12 @@ const handleEdit = (e) => {
 }
 
 const handleDelete = (e) => {
-  const btnId = e.path[3].dataset.id;
+  const btnId = e.target.parentNode.parentNode.dataset.id;
 
   // send delete request with that ID
   let answer = confirm('Are you sure you want to remove this account?')
   if (answer) {
-    deleteExpense(btnId);
+    deleteAccount(btnId);
   }
 }
 
@@ -96,20 +96,18 @@ const sendEdits = async (e) => {
     desc: els.txtAccountNameEl.value,
   });
   if (resp.status === 200) {
-    return location.reload();
+    return window.location = '/tracker/accounts?update=1'
   }
-  console.log(resp)
 }
 
-const deleteExpense = async (btnId) => {
+const deleteAccount = async (btnId) => {
   let resp = await fetchRequest('/accounts', 'DELETE',
     {
       id: btnId
     });
   if (resp.status === 200) {
-    return location.reload();
+    return window.location = '/tracker/accounts?delete=1'
   }
-  console.log(resp);
 }
 
 const showNoAccounts = () => {
@@ -120,11 +118,26 @@ const showNoAccounts = () => {
   els.accountsEl.appendChild(div);
 }
 
+const parseQuery = () => {
+  if (window.location.search.length === 0) return;
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get('add')) {
+    if (params.get('add') == 1) {
+      showAlert('success', 'Account added successfully!', els.accountsEl);
+    }
+  } else if (params.get('update')) {
+    showAlert('success', 'Account updated successfully!', els.accountsEl);
+  } else if (params.get('delete')) {
+    showAlert('success', 'Account removed successfully!', els.accountsEl);
+  }
+}
 
 const init = async () => {
   accounts = await getAccounts();
   if (accounts.length === 0) return showNoAccounts();
   showAccounts(accounts);
+  parseQuery();
 }
 
 init();
