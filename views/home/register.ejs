@@ -27,31 +27,36 @@
       <section class="et-login">
         <h2 class="et-login-title">Create an Account</h2>
         <% if (locals.messages.errors) { %>
-          <% messages.errors.forEach( el=> { %>
-            <div class="alert alert-danger">
+          <div class="alert alert-danger">
+            <% messages.errors.forEach( el=> { %>
               <%= el.msg %>
-            </div>
-            <% }) %>
-              <% } %>
-                <form method="post" action="/register" class="et-form-login">
-                  <fieldset>
-                    <label class="form-label" for="email">Email Address</label>
-                    <input type="text" name="email" class="form-control" placeholder="you@somewhere.com">
-                  </fieldset>
-                  <fieldset>
-                    <label class="form-label" for="password">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Enter a password">
-                  </fieldset>
-                  <fieldset>
-                    <label class="form-label" for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" class="form-control"
-                      placeholder="Confirm your password">
-                  </fieldset>
-                  <fieldset class="form-btns">
-                    <a href="/" class="btn-link">Sign In</a>
-                    <button class="et-btn-login"><i class="fas fa-user-plus"></i> Create Account</button>
-                  </fieldset>
-                </form>
+                <% }) %>
+          </div>
+          <% } %>
+            <form method="post" action="/register" class="et-form-login">
+              <fieldset>
+                <label class="form-label" for="email">Email Address</label>
+                <input type="text" id="email" name="email" class="form-control" placeholder="you@somewhere.com"
+                  required>
+              </fieldset>
+              <fieldset class="fieldset-pass">
+                <label class="form-label" for="password" minlength="8" required>Password <small>(at least 8
+                    characters)</small></label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter a password"
+                  required>
+                <div class="invalid-feedback">Password must be 8 characters</div>
+              </fieldset>
+              <fieldset class="fieldset-confirmPass">
+                <label class="form-label" for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+                  placeholder="Confirm your password" minlength="8" required>
+                <div class="invalid-feedback">Passwords must match</div>
+              </fieldset>
+              <fieldset class="form-btns">
+                <a href="/" class="btn-link">Sign In</a>
+                <button class="et-btn-login"><i class="fas fa-user-plus"></i> Create Account</button>
+              </fieldset>
+            </form>
       </section>
       <aside class="et-intro">
         <img src="/img/et-illustration-2.svg" alt="Illustration of woman watching a money tree grow">
@@ -70,6 +75,30 @@
       </p>
     </footer>
   </div>
+  <script>
+    const els = {
+      passInputEl: document.getElementById('password'),
+      confirmPassEl: document.getElementById('confirmPassword'),
+    }
+    function checkPass(e) {
+      if (e.target.value.length < 8) {
+        e.target.classList.add('is-invalid');
+        setTimeout(() => {
+          e.target.classList.remove('is-invalid');
+        }, 2000)
+      }
+    }
+    function checkPassConfirm(e) {
+      if (e.target.value !== els.passInputEl.value) {
+        e.target.classList.add('is-invalid');
+        setTimeout(() => {
+          e.target.classList.remove('is-invalid');
+        }, 2000)
+      }
+    }
+    els.passInputEl.addEventListener('blur', checkPass);
+    els.confirmPassEl.addEventListener('blur', checkPassConfirm);
+  </script>
 </body>
 
 </html>

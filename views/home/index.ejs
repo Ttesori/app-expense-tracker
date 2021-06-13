@@ -27,22 +27,22 @@
       <section class="et-login">
         <h2 class="et-login-title">Sign In</h2>
         <% if (locals.messages.errors) { %>
-          <% messages.errors.forEach( el=> { %>
-            <div class="alert alert-danger">
+          <div class="alert alert-danger">
+            <% messages.errors.forEach( el=> { %>
               <%= el.msg %>
-            </div>
-            <% }) %>
-              <% } %>
-                <form method="post" action="/login" class="et-form-login">
-                  <label class="form-label">Email Address</label>
-                  <input type="email" name="email" class="form-control" placeholder="you@somewhere.com">
-                  <label class="form-label">Password</label>
-                  <input type="password" name="password" class="form-control" placeholder="Enter your password">
-                  <fieldset class="form-btns">
-                    <a href="/register" class="btn-link">Create Account</a>
-                    <button class="et-btn-login"><i class="fas fa-sign-in-alt"></i> Sign In</button>
-                  </fieldset>
-                </form>
+                <% }) %>
+          </div>
+          <% } %>
+            <form method="post" action="/login" class="et-form-login">
+              <label class="form-label">Email Address</label>
+              <input type="email" name="email" class="form-control" placeholder="you@somewhere.com">
+              <label class="form-label">Password</label>
+              <input type="password" name="password" class="form-control" placeholder="Enter your password">
+              <fieldset class="form-btns">
+                <a href="/register" class="btn-link">Create Account</a>
+                <button class="et-btn-login"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+              </fieldset>
+            </form>
       </section>
       <aside class="et-intro">
         <img src="/img/et-illustration.svg" alt="Illustration of woman and a wallet with bills and pennies flying out">

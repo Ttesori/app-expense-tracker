@@ -488,7 +488,7 @@ td.col_name {
 /* Login */
 .page-home,
 .page-register {
-  background-image: radial-gradient(ellipse at center, #166374 0%, #24545e 80%);
+  background-image: radial-gradient(ellipse at center, #116a7e 0%, #18444d 95%);
   min-height: 85vh;
   display: flex;
   justify-content: center;
@@ -551,6 +551,15 @@ td.col_name {
   margin-top: 1rem;
 }
 
+.form-label small {
+  font-size: 0.9rem;
+}
+
+.et-form-login .form-control,
+.et-form-login fieldset {
+  position: relative;
+}
+
 .et-form-login .form-control::placeholder {
   color: rgba(36, 84, 94, 0.5);
 }
@@ -568,6 +577,27 @@ td.col_name {
   padding: 0.6em 1em;
 }
 
+.invalid-feedback.hidden {
+}
+
+.invalid-feedback {
+  text-align: right;
+  transform: translateX(5000px);
+  position: absolute;
+  right: 3em;
+  bottom: 0.85em;
+  max-width: 200px;
+  line-height: 1.2;
+  transition: opacity 0.2s;
+  display: block;
+  opacity: 0;
+}
+
+.is-invalid ~ .invalid-feedback {
+  opacity: 1;
+  transform: translateX(0em);
+}
+
 .form-btns {
   display: flex;
   justify-content: flex-end;
@@ -578,6 +608,21 @@ td.col_name {
 .form-btns .btn-link {
   color: var(--color-secondary);
   margin-right: 1.5em;
+  border-radius: 0.5rem;
+  padding: 0.25em;
+}
+
+.form-btns .btn-link:hover,
+.form-btns .btn-link:focus,
+.form-btns .btn-link:focus-visible {
+  color: #222;
+  transform: scale(1.1);
+  outline: 0;
+}
+
+.form-btns .btn-link:focus,
+.form-btns .btn-link:focus-visible {
+  box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.5);
 }
 
 .et-btn-login {
@@ -592,8 +637,14 @@ td.col_name {
 }
 
 .et-btn-login:hover,
-.et-btn-login:focus {
+.et-btn-login:focus,
+.et-btn-login:focus-visible {
   background-color: teal;
+  outline: 0;
+}
+.et-btn-login:focus,
+.et-btn-login:focus-visible {
+  box-shadow: 0px 0px 0px 3px rgba(255, 255, 255, 0.5);
 }
 
 .et-btn-login .fas {
@@ -800,6 +851,11 @@ td.col_name {
     max-width: 600px;
     margin: 0 auto;
   }
+
+  .invalid-feedback {
+    bottom: 0.95em;
+    max-width: 225px;
+  }
 }
 
 @media screen and (min-width: 992px) {
@@ -884,6 +940,11 @@ td.col_name {
     font-size: 1.1rem;
     margin-top: 0.5em;
     margin-bottom: 0.15em;
+  }
+
+  .invalid-feedback {
+    width: 150px;
+    bottom: 0.5em;
   }
 
   .et-footer.home cite a {
