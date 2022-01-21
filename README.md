@@ -4,7 +4,7 @@ This project is a web application which allows an individual to track their mont
 
 **Link to project:** https://expense-tracker-tt.herokuapp.com/
 
-Use demo login: `testing@testing.com` / `testingtesting`
+Use demo login: `demo@testing.com` / `testingtesting`
 
 ## How It's Made:
 
