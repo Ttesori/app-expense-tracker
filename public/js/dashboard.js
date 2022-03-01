@@ -240,7 +240,7 @@ const populateMonths = async () => {
       const option = document.createElement('option');
       option.value = getMonthString(year, month);
       option.textContent = monthString;
-      els.selMonthPicker.appendChild(option);
+      els.selMonthPicker.prepend(option);
     })
   }
 

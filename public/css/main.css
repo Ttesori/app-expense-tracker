@@ -367,6 +367,14 @@ img.et-logo {
   border-bottom-color: rgba(36, 84, 94, 0.5);
 }
 
+.et-footer.home .link-demo {
+  font-weight: normal;
+  font-family: var(--font-primary);
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
 /* Accounts-Page Specific */
 .et-accounts-list {
   list-style: none;
