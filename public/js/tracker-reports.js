@@ -246,7 +246,7 @@ const populateMonths = (expenses) => {
       const option = document.createElement('option');
       option.value = getMonthString(year, month);
       option.textContent = monthString;
-      els.monthSwitcherEl.appendChild(option);
+      els.monthSwitcherEl.prepend(option);
     })
   }
 }
