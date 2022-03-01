@@ -7,7 +7,8 @@
 
 :root {
   --color-secondary: #24545e;
-  --color-primary: #20cc94;
+  --color-primary: #17b890;
+  --color-primary-lt: #26efa7;
   --color-light: #f8f9fa;
   --font-accent: 'Roboto Slab', serif;
   --font-primary: 'Open Sans', sans-serif;
@@ -67,7 +68,7 @@ h3 {
   background-image: radial-gradient(
     ellipse at center,
     #26efa7 0%,
-    #20cc94 100%
+    var(--color-primary) 100%
   );
   text-align: center;
   padding: 1.7rem 0 0.75rem;
@@ -342,7 +343,11 @@ img.et-logo {
 }
 
 .et-footer {
-  background: var(--color-primary);
+  background-image: radial-gradient(
+    ellipse at center,
+    #26efa7 0%,
+    var(--color-primary) 100%
+  );
   color: var(--color-secondary);
   font-family: var(--font-accent);
   text-align: center;
@@ -577,7 +582,7 @@ td.col_name {
   background-image: radial-gradient(
     ellipse at center,
     #26efa7 0%,
-    #20cc94 100%
+    var(--color-primary) 100%
   );
   padding: 2em;
   border-radius: 0.5rem;

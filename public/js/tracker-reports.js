@@ -15,6 +15,20 @@ const showNoReports = () => {
   <p>Add expenses to generate reports.</p>
   `;
   els.reportsEl.appendChild(div);
+  document.querySelector('.is-loading').remove();
+}
+
+const showPastReports = () => {
+  const div = document.createElement('div');
+  div.classList.add('no-reports');
+  div.innerHTML = `
+  <i class="fa fa-question-circle"></i>
+  <h3>No reports available for current month.</h3>
+  <p>Choose a month from the dropdown to view past reports.</p>
+  `;
+  els.reportsEl.appendChild(div);
+  document.querySelector('.is-loading').remove();
+  els.monthSwitcherEl.addEventListener('change', handleMonthChange);
 }
 
 const showReport = (expenses, month) => {
@@ -246,10 +260,12 @@ const handleMonthChange = async () => {
 
 const init = async () => {
   let expenses = await getExpensesByMonth();
-  populateMonths(await getExpenses());
-  if (expenses.length === 0) return showNoReports();
+  let expensesByMonth = await getExpenses();
+  populateMonths(expensesByMonth);
+  if (expenses.length === 0 && expensesByMonth.length > 0) return showPastReports();
+  if (expensesByMonth.length === 0) return showNoReports();
   showReport(expenses, getMonthString());
-  els.monthSwitcherEl.addEventListener('change', handleMonthChange)
+  els.monthSwitcherEl.addEventListener('change', handleMonthChange);
 }
 
 init();
