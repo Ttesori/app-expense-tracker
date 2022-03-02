@@ -12,7 +12,7 @@ Use demo login: `demo@testing.com` / `testingtesting`
 
 This is a full-stack application consisting of a NodeJS/Express server using PassportJS for authentication, EJS as a view engine, and HTML/CSS/Javascript for an interactive front-end.
 
-This project was originally written in PHP/MySQL as my final project in the Computer Programming and Analysis curriculm at Seminole State College. Once I decided to concentrate on Javascript, however, I decided to rewrite the application using NodeJS/Express/MongoDB. This also gave me the opportunity to refresh the look and add some additional features, such as the charts on the reports page.
+This project was originally written in PHP/MySQL as my final project in the Computer Programming and Analysis curriculum at Seminole State College. Once I decided to concentrate on Javascript, however, I decided to rewrite the application using NodeJS/Express/MongoDB. This also gave me the opportunity to refresh the look and add some additional features, such as the charts on the reports page.
 
 # Features:
 
