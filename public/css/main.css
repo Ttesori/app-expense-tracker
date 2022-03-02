@@ -829,6 +829,10 @@ td.col_name {
   body {
     background: var(--color-light);
   }
+  .et-header {
+    border: 0;
+  }
+
   .et-main {
     width: 90%;
     max-width: 980px;
