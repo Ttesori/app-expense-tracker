@@ -370,9 +370,16 @@ img.et-logo {
 .et-footer.home .link-demo {
   font-weight: normal;
   font-family: var(--font-primary);
-  text-transform: uppercase;
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.3);
+}
+
+.link-demo .fas {
+  padding-right: 0.25rem;
+}
+
+.et-footer .bullet {
+  padding: 0 0.35rem;
 }
 
 /* Accounts-Page Specific */
