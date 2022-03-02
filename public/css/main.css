@@ -343,28 +343,24 @@ img.et-logo {
 }
 
 .et-footer {
-  background-image: radial-gradient(
-    ellipse at center,
-    #26efa7 0%,
-    var(--color-primary) 100%
-  );
-  color: var(--color-secondary);
+  background: var(--color-secondary);
+  color: rgba(255, 255, 255, 0.5);
   font-family: var(--font-accent);
   text-align: center;
   padding: 1.5rem;
-  border-top: 2px solid var(--color-secondary);
+  border-top: 3px solid var(--color-primary);
 }
 
 .et-footer a {
-  color: var(--color-secondary);
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  border-bottom: 1px solid rgba(36, 84, 94, 0.2);
+  border-bottom: 1px solid rgba(23, 184, 144, 0.5);
 }
 
 .et-footer a:hover,
 .et-footer a:focus {
-  color: #222;
-  border-bottom-color: rgba(36, 84, 94, 0.5);
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
 .et-footer.home .link-demo {
