@@ -1,11 +1,11 @@
 <%- include('../partials/_head.ejs') %>
   <div class="et-main container">
     <section class="et-content">
-      <h1 class="et-page-title">Accounts
+      <h2 class="et-page-title">Accounts
         <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal">
           <i class="fa fa-plus"></i>
           Add New</button>
-      </h1>
+      </h2>
 
       <section id="accounts">
         <div class="is-loading">
@@ -26,7 +26,7 @@
             <div class="form-validation"></div>
 
             <fieldset>
-              <label class="form-label">Description</label>
+              <label class="form-label" for="account_desc">Description</label>
               <input type="text" name="account_desc" class="txt-account_desc form-control">
             </fieldset>
             <input type="hidden" class="hidden-id" name="_id" value="">

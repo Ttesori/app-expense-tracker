@@ -29,7 +29,8 @@ This project was originally written in PHP/MySQL as my final project in the Comp
 - Dealing with various currency and date formats is pretty involved -- luckily, I found `dayjs()` to help with the date formatting, and used Javascript's `Intl.NumberFormat`, part of the Internationalization API, to help with the currency formatting.
 - I wanted to implement the front-end with EJS and vanilla Javascript, but I found myself missing the organization of React quite a bit.
 
-## Additional Feature Ideas:
+## Additional Feature/Optimization Ideas:
 
 - Add line chart option to reports to show how total spending changes over time.
 - Utilize modals for confirmation dialogs for deleting expenses/accounts
+- Improve accessibility by creating consistent focus outlines for every element

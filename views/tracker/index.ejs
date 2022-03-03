@@ -4,22 +4,22 @@
       <input type="text" placeholder="Type here to search..." id="search" class="form-control">
 
       <section class="filter-month">
-        <label class="form-label">Show Month: </label>
+        <label class="form-label" for="sel-choose-month">Show Month: </label>
         <select id="sel-choose-month" class="form-select">
           <option value="all">All Expenses</option>
         </select>
       </section>
     </div>
     <section class="et-content">
-      <h1 class="et-page-title">
+      <h2 class="et-page-title">
         <% if (user.display_name !=='' ) { %>
           <%= user.display_name + "'s " %>
             <% } %>
               Expenses <button class="btn-add" data-bs-toggle="modal" data-bs-target="#add-modal"><i
                   class="fa fa-plus"></i>
                 Add New</button>
-      </h1>
-      <h2 class="expenses-desc"></h2>
+      </h2>
+      <h3 class="expenses-desc"></h3>
       <section id="expenses">
         <div class="is-loading">
           Loading Expenses...
@@ -38,27 +38,27 @@
         <div class="modal-body">
           <div class="form-validation"></div>
           <fieldset>
-            <label class="form-label">Date</label>
+            <label class="form-label" for="expense_date">Date</label>
             <input type="date" name="expense_date" class="date-expense_date form-control" required>
           </fieldset>
           <fieldset>
-            <label class="form-label">Account</label>
+            <label class="form-label" for="expense_account">Account</label>
             <select name="expense_account" class="txt-expense_acc form-select" id="expense_account" required>
             </select>
 
           </fieldset>
           <fieldset>
-            <label class="form-label">Expense Description</label>
+            <label class="form-label" for="expense_description">Expense Description</label>
             <input type="text" name="expense_description" class="txt-expense_desc form-control"
               placeholder="Enter expense description..." required>
           </fieldset>
           <fieldset>
-            <label class="form-label">Amount</label>
+            <label class="form-label" for="expense_amount">Amount</label>
             <input type="number" min="0" step=".01" name="expense_amount" class="number-expense_amt form-control"
               placeholder="Enter expense amount..." required>
           </fieldset>
           <fieldset>
-            <label class="form-label">Category</label>
+            <label class="form-label" for="expense_category">Category</label>
             <input type="text" name="expense_category" class="txt-expense_category form-control"
               list="category_datalist" placeholder="Enter expense category..." required>
           </fieldset>

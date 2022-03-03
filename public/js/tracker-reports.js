@@ -119,8 +119,16 @@ const createPieChart = (section, map, title) => {
     labels.push(category.name);
   });
   const canvas = document.createElement('canvas');
-  section.appendChild(canvas);
+  const figure = document.createElement('figure');
+  const figcaption = document.createElement('figcaption');
+  figcaption.textContent = `A pie chart showing ${title}. The same data is reflected in the preceeding table.`;
+  figcaption.className = 'figcaption';
   canvas.className = 'chart';
+
+  figure.appendChild(canvas);
+  figure.appendChild(figcaption);
+  section.appendChild(figure);
+
 
   const data = {
     labels: labels,

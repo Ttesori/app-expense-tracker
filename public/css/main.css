@@ -34,6 +34,15 @@ a {
   transition-property: color, background-color;
 }
 
+a:focus,
+a:focus-visible,
+.btn-add:focus-visible,
+.btn-update-profile:focus-visible {
+  outline: 3px solid rgba(23, 184, 144, 0.5);
+  box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.6);
+  border-radius: 0.5em;
+}
+
 h1,
 h2,
 h3 {
@@ -43,6 +52,11 @@ h3 {
 
 h2 {
   font-size: 1.4rem;
+}
+
+section > h2,
+aside > h2 {
+  font-size: 1.7rem;
 }
 
 h3 {
@@ -75,7 +89,12 @@ h3 {
   position: relative;
   border-bottom: 3px solid var(--color-secondary);
 }
-
+.et-header a:focus,
+.et-header a:focus-visible {
+  outline: 3px solid rgba(36, 84, 94, 0.5);
+  box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.6);
+  border-radius: 0.5em;
+}
 img.et-logo {
   width: 90%;
   max-width: 350px;
@@ -322,6 +341,12 @@ img.et-logo {
   font-size: 1.1rem;
 }
 
+.modal-dialog .form-select:focus,
+.modal-dialog .form-control:focus {
+  border-color: rgba(36, 84, 94, 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(23, 184, 144, 0.5);
+}
+
 .modal-dialog .btn-primary {
   font-size: 1.2rem;
 }
@@ -509,6 +534,12 @@ td.col_name {
   max-width: 350px;
   max-height: 275px;
   margin-bottom: 1rem;
+}
+
+.report-section .figcaption {
+  height: 0px;
+  max-width: 350px;
+  overflow: hidden;
 }
 
 /* Profile Styles */
